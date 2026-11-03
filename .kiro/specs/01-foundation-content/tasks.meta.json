@@ -1,0 +1,475 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "mvn flyway:migrate thành công V001–V010": [
+      {
+        "executionId": "faca78d1-8c31-4ab3-a98a-107fe9e2efd7",
+        "chatSessionId": "sess_1522c6f8-713e-4ddd-8e1d-e5d7f4d9da92",
+        "timestamp": 1792497668308
+      },
+      {
+        "executionId": "faca78d1-8c31-4ab3-a98a-107fe9e2efd7",
+        "chatSessionId": "sess_1522c6f8-713e-4ddd-8e1d-e5d7f4d9da92",
+        "timestamp": 1792499690783
+      }
+    ],
+    "rag schema migrations chạy thành công": [
+      {
+        "executionId": "7e34ea4a-c1d0-446d-a40b-12415bc7319d",
+        "chatSessionId": "sess_1522c6f8-713e-4ddd-8e1d-e5d7f4d9da92",
+        "timestamp": 1792499789226
+      },
+      {
+        "executionId": "7e34ea4a-c1d0-446d-a40b-12415bc7319d",
+        "chatSessionId": "sess_1522c6f8-713e-4ddd-8e1d-e5d7f4d9da92",
+        "timestamp": 1792502790982
+      }
+    ],
+    "8 chủ đề seed tồn tại với aliases": [
+      {
+        "executionId": "7e34ea4a-c1d0-446d-a40b-12415bc7319d",
+        "chatSessionId": "sess_1522c6f8-713e-4ddd-8e1d-e5d7f4d9da92",
+        "timestamp": 1792502863331
+      },
+      {
+        "executionId": "7e34ea4a-c1d0-446d-a40b-12415bc7319d",
+        "chatSessionId": "sess_1522c6f8-713e-4ddd-8e1d-e5d7f4d9da92",
+        "timestamp": 1792503408284
+      }
+    ],
+    "ERD diagram trong docs/architecture/db-schema.md": [
+      {
+        "executionId": "7e34ea4a-c1d0-446d-a40b-12415bc7319d",
+        "chatSessionId": "sess_1522c6f8-713e-4ddd-8e1d-e5d7f4d9da92",
+        "timestamp": 1792503463117
+      },
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549192857
+      },
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549326315
+      },
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549533666
+      }
+    ],
+    "Tất cả AC-AUTH-01..07 và AC-RBAC-01..02 pass": [
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549196245
+      },
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549682399
+      },
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792552612807
+      }
+    ],
+    "Password không bao giờ xuất hiện trong response": [
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549198106
+      },
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792552634340
+      },
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792553387327
+      }
+    ],
+    "JWT secret chỉ đọc từ env JWT_SECRET": [
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549198868
+      },
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792553406590
+      },
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792553917464
+      }
+    ],
+    "docs/api/auth.md tồn tại": [
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549200236
+      },
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792553926638
+      },
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792554006381
+      }
+    ],
+    "AC-USER-01, AC-USER-02 pass": [
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549201245
+      },
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792554021514
+      },
+      {
+        "executionId": "293d089f-6ded-4a7f-9be0-ae533c8c8365",
+        "chatSessionId": "sess_0cf47a88-1d1f-4cfc-9dfd-18c5e0f7971a",
+        "timestamp": 1793523402049
+      },
+      {
+        "executionId": "293d089f-6ded-4a7f-9be0-ae533c8c8365",
+        "chatSessionId": "sess_0cf47a88-1d1f-4cfc-9dfd-18c5e0f7971a",
+        "timestamp": 1793523616491
+      },
+      {
+        "executionId": "293d089f-6ded-4a7f-9be0-ae533c8c8365",
+        "chatSessionId": "sess_0cf47a88-1d1f-4cfc-9dfd-18c5e0f7971a",
+        "timestamp": 1793524460860
+      }
+    ],
+    "Refresh token bị revoke khi lock": [
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549202122
+      },
+      {
+        "executionId": "293d089f-6ded-4a7f-9be0-ae533c8c8365",
+        "chatSessionId": "sess_0cf47a88-1d1f-4cfc-9dfd-18c5e0f7971a",
+        "timestamp": 1793524483709
+      },
+      {
+        "executionId": "293d089f-6ded-4a7f-9be0-ae533c8c8365",
+        "chatSessionId": "sess_0cf47a88-1d1f-4cfc-9dfd-18c5e0f7971a",
+        "timestamp": 1793525527494
+      }
+    ],
+    "docs/api/admin-users.md tồn tại": [
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549203656
+      },
+      {
+        "executionId": "293d089f-6ded-4a7f-9be0-ae533c8c8365",
+        "chatSessionId": "sess_0cf47a88-1d1f-4cfc-9dfd-18c5e0f7971a",
+        "timestamp": 1793525542739
+      },
+      {
+        "executionId": "293d089f-6ded-4a7f-9be0-ae533c8c8365",
+        "chatSessionId": "sess_0cf47a88-1d1f-4cfc-9dfd-18c5e0f7971a",
+        "timestamp": 1793525636308
+      }
+    ],
+    "AC-TOPIC-01, AC-TOPIC-02, AC-TOPIC-03 pass": [
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549204510
+      },
+      {
+        "executionId": "293d089f-6ded-4a7f-9be0-ae533c8c8365",
+        "chatSessionId": "sess_0cf47a88-1d1f-4cfc-9dfd-18c5e0f7971a",
+        "timestamp": 1793525784106
+      },
+      {
+        "executionId": "293d089f-6ded-4a7f-9be0-ae533c8c8365",
+        "chatSessionId": "sess_0cf47a88-1d1f-4cfc-9dfd-18c5e0f7971a",
+        "timestamp": 1793529495231
+      }
+    ],
+    "8 chủ đề seed với aliases": [
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549205478
+      },
+      {
+        "executionId": "293d089f-6ded-4a7f-9be0-ae533c8c8365",
+        "chatSessionId": "sess_0cf47a88-1d1f-4cfc-9dfd-18c5e0f7971a",
+        "timestamp": 1793529537903
+      },
+      {
+        "executionId": "293d089f-6ded-4a7f-9be0-ae533c8c8365",
+        "chatSessionId": "sess_0cf47a88-1d1f-4cfc-9dfd-18c5e0f7971a",
+        "timestamp": 1793531606780
+      }
+    ],
+    "docs/api/topics.md tồn tại": [
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549206299
+      },
+      {
+        "executionId": "293d089f-6ded-4a7f-9be0-ae533c8c8365",
+        "chatSessionId": "sess_0cf47a88-1d1f-4cfc-9dfd-18c5e0f7971a",
+        "timestamp": 1793531621252
+      },
+      {
+        "executionId": "293d089f-6ded-4a7f-9be0-ae533c8c8365",
+        "chatSessionId": "sess_0cf47a88-1d1f-4cfc-9dfd-18c5e0f7971a",
+        "timestamp": 1793531736652
+      }
+    ],
+    "AC-Q-01, AC-Q-02, AC-Q-03 pass": [
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549207263
+      },
+      {
+        "executionId": "293d089f-6ded-4a7f-9be0-ae533c8c8365",
+        "chatSessionId": "sess_0cf47a88-1d1f-4cfc-9dfd-18c5e0f7971a",
+        "timestamp": 1793531817119
+      },
+      {
+        "executionId": "c2c54b31-2842-4a95-ac68-3cdf082acea5",
+        "chatSessionId": "sess_d3bab097-82ac-4ec8-ace9-cfbc4d447ef7",
+        "timestamp": 1793533142147
+      },
+      {
+        "executionId": "c2c54b31-2842-4a95-ac68-3cdf082acea5",
+        "chatSessionId": "sess_d3bab097-82ac-4ec8-ace9-cfbc4d447ef7",
+        "timestamp": 1793533150327
+      },
+      {
+        "executionId": "c2c54b31-2842-4a95-ac68-3cdf082acea5",
+        "chatSessionId": "sess_d3bab097-82ac-4ec8-ace9-cfbc4d447ef7",
+        "timestamp": 1793534237316
+      }
+    ],
+    "Publish thành công trigger indexing (mock)": [
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549208524
+      },
+      {
+        "executionId": "c2c54b31-2842-4a95-ac68-3cdf082acea5",
+        "chatSessionId": "sess_d3bab097-82ac-4ec8-ace9-cfbc4d447ef7",
+        "timestamp": 1793534245616
+      },
+      {
+        "executionId": "c2c54b31-2842-4a95-ac68-3cdf082acea5",
+        "chatSessionId": "sess_d3bab097-82ac-4ec8-ace9-cfbc4d447ef7",
+        "timestamp": 1793535326048
+      }
+    ],
+    "docs/api/questions.md tồn tại": [
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549209349
+      },
+      {
+        "executionId": "c2c54b31-2842-4a95-ac68-3cdf082acea5",
+        "chatSessionId": "sess_d3bab097-82ac-4ec8-ace9-cfbc4d447ef7",
+        "timestamp": 1793535331853
+      },
+      {
+        "executionId": "c2c54b31-2842-4a95-ac68-3cdf082acea5",
+        "chatSessionId": "sess_d3bab097-82ac-4ec8-ace9-cfbc4d447ef7",
+        "timestamp": 1793535527282
+      }
+    ],
+    "AC-DOC-01, AC-DOC-02, AC-LOG-01 pass": [
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549211822
+      },
+      {
+        "executionId": "c2c54b31-2842-4a95-ac68-3cdf082acea5",
+        "chatSessionId": "sess_d3bab097-82ac-4ec8-ace9-cfbc4d447ef7",
+        "timestamp": 1793535535863
+      },
+      {
+        "executionId": "c2c54b31-2842-4a95-ac68-3cdf082acea5",
+        "chatSessionId": "sess_d3bab097-82ac-4ec8-ace9-cfbc4d447ef7",
+        "timestamp": 1793537781471
+      }
+    ],
+    "Mock provider dùng trong test CI": [
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549212971
+      },
+      {
+        "executionId": "c2c54b31-2842-4a95-ac68-3cdf082acea5",
+        "chatSessionId": "sess_d3bab097-82ac-4ec8-ace9-cfbc4d447ef7",
+        "timestamp": 1793537791737
+      },
+      {
+        "executionId": "c2c54b31-2842-4a95-ac68-3cdf082acea5",
+        "chatSessionId": "sess_d3bab097-82ac-4ec8-ace9-cfbc4d447ef7",
+        "timestamp": 1793539458316
+      }
+    ],
+    "X-Internal-Key được verify phía Python": [
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549216410
+      },
+      {
+        "executionId": "c2c54b31-2842-4a95-ac68-3cdf082acea5",
+        "chatSessionId": "sess_d3bab097-82ac-4ec8-ace9-cfbc4d447ef7",
+        "timestamp": 1793539464471
+      },
+      {
+        "executionId": "c2c54b31-2842-4a95-ac68-3cdf082acea5",
+        "chatSessionId": "sess_d3bab097-82ac-4ec8-ace9-cfbc4d447ef7",
+        "timestamp": 1793539528645
+      }
+    ],
+    "docs/api/internal-ai-service.md tồn tại": [
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549217870
+      },
+      {
+        "executionId": "c2c54b31-2842-4a95-ac68-3cdf082acea5",
+        "chatSessionId": "sess_d3bab097-82ac-4ec8-ace9-cfbc4d447ef7",
+        "timestamp": 1793539533957
+      },
+      {
+        "executionId": "c2c54b31-2842-4a95-ac68-3cdf082acea5",
+        "chatSessionId": "sess_d3bab097-82ac-4ec8-ace9-cfbc4d447ef7",
+        "timestamp": 1793539656986
+      }
+    ],
+    "Login/logout hoạt động": [
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549218797
+      },
+      {
+        "executionId": "c2c54b31-2842-4a95-ac68-3cdf082acea5",
+        "chatSessionId": "sess_d3bab097-82ac-4ec8-ace9-cfbc4d447ef7",
+        "timestamp": 1793539668313
+      },
+      {
+        "executionId": "603b6e92-dc40-4186-b542-b706cacb132b",
+        "chatSessionId": "sess_33374db3-b16d-476a-9671-cb3fa97f7cb9",
+        "timestamp": 1793542252957
+      },
+      {
+        "executionId": "603b6e92-dc40-4186-b542-b706cacb132b",
+        "chatSessionId": "sess_33374db3-b16d-476a-9671-cb3fa97f7cb9",
+        "timestamp": 1793542269870
+      },
+      {
+        "executionId": "b6cbc24f-0706-4e62-986d-9114ec674e34",
+        "chatSessionId": "sess_5c9b4ab8-f85d-4556-b615-be1394d462e1",
+        "timestamp": 1793543245346
+      },
+      {
+        "executionId": "b6cbc24f-0706-4e62-986d-9114ec674e34",
+        "chatSessionId": "sess_5c9b4ab8-f85d-4556-b615-be1394d462e1",
+        "timestamp": 1793543309334
+      },
+      {
+        "executionId": "b6cbc24f-0706-4e62-986d-9114ec674e34",
+        "chatSessionId": "sess_5c9b4ab8-f85d-4556-b615-be1394d462e1",
+        "timestamp": 1793545541850
+      }
+    ],
+    "Route guard Candidate→/admin redirect": [
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549219754
+      },
+      {
+        "executionId": "b6cbc24f-0706-4e62-986d-9114ec674e34",
+        "chatSessionId": "sess_5c9b4ab8-f85d-4556-b615-be1394d462e1",
+        "timestamp": 1793543246632
+      },
+      {
+        "executionId": "b6cbc24f-0706-4e62-986d-9114ec674e34",
+        "chatSessionId": "sess_5c9b4ab8-f85d-4556-b615-be1394d462e1",
+        "timestamp": 1793545557362
+      },
+      {
+        "executionId": "b6cbc24f-0706-4e62-986d-9114ec674e34",
+        "chatSessionId": "sess_5c9b4ab8-f85d-4556-b615-be1394d462e1",
+        "timestamp": 1793545878123
+      }
+    ],
+    "Admin CRUD Topics/Questions/Documents/Users": [
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549221875
+      },
+      {
+        "executionId": "b6cbc24f-0706-4e62-986d-9114ec674e34",
+        "chatSessionId": "sess_5c9b4ab8-f85d-4556-b615-be1394d462e1",
+        "timestamp": 1793543247650
+      },
+      {
+        "executionId": "b6cbc24f-0706-4e62-986d-9114ec674e34",
+        "chatSessionId": "sess_5c9b4ab8-f85d-4556-b615-be1394d462e1",
+        "timestamp": 1793545899914
+      },
+      {
+        "executionId": "b6cbc24f-0706-4e62-986d-9114ec674e34",
+        "chatSessionId": "sess_5c9b4ab8-f85d-4556-b615-be1394d462e1",
+        "timestamp": 1793549605584
+      }
+    ],
+    "Giao diện tiếng Việt (NFR-26)": [
+      {
+        "executionId": "1b1892d7-6825-485d-8c70-f98e0d690a92",
+        "chatSessionId": "sess_2498bd05-ee45-4924-a589-dc47abcd07aa",
+        "timestamp": 1792549224262
+      },
+      {
+        "executionId": "b6cbc24f-0706-4e62-986d-9114ec674e34",
+        "chatSessionId": "sess_5c9b4ab8-f85d-4556-b615-be1394d462e1",
+        "timestamp": 1793543248788
+      },
+      {
+        "executionId": "b6cbc24f-0706-4e62-986d-9114ec674e34",
+        "chatSessionId": "sess_5c9b4ab8-f85d-4556-b615-be1394d462e1",
+        "timestamp": 1793549623786
+      },
+      {
+        "executionId": "b6cbc24f-0706-4e62-986d-9114ec674e34",
+        "chatSessionId": "sess_5c9b4ab8-f85d-4556-b615-be1394d462e1",
+        "timestamp": 1793550561360
+      }
+    ]
+  }
+}

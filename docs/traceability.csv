@@ -1,0 +1,162 @@
+requirement_id,type,priority,moscow,description_vi,linked_uc,linked_us,linked_ac,linked_nfr_br,module,status,notes
+FR-01,FR,Must,Must,Đăng ký / đăng nhập / đăng xuất bằng email + mật khẩu,UC-01,,,"NFR-17,NFR-19",M1,planned,💡 Accepted proposal
+FR-02,FR,Should,Should,Xem và chỉnh sửa hồ sơ cá nhân,UC-01,,,"NFR-17,NFR-19",M1,planned,💡 Accepted proposal
+FR-04,FR,Must,Must,Nộp JD bằng cách dán văn bản,"UC-03,UC-04","US-02,US-16","AC-01,AC-02",NFR-05,M4,planned,✅ Confirmed
+FR-06,FR,Must,Must,Phân tích JD: trích xuất chủ đề / mức / level; ánh xạ danh mục,"UC-04","US-02,US-16","AC-01,AC-21",NFR-05,M4,planned,✅ Confirmed
+FR-07,FR,Must,Must,Xem và chỉnh kết quả phân tích JD trước khi bắt đầu,UC-04,US-03,AC-03,NFR-05,M4,planned,✅ Confirmed; rút gọn được nếu trễ
+FR-09,FR,Must,Must,Tạo phiên phỏng vấn từ JD đã xác nhận,UC-05,US-04,,BR-16,M5,planned,✅ Confirmed
+FR-10,FR,Must,Must,Cấu hình phiên: số câu tối đa và thời lượng tổng,UC-05,US-04,,BR-09,M5,planned,✅ Confirmed
+FR-11,FR,Must,Must,Đồng hồ đếm toàn phiên; tạm dừng khi AI xử lý,"UC-05,UC-06",US-05,AC-04,"NFR-04,NFR-02",M5,planned,✅ Confirmed
+FR-12,FR,Should,Should,Giới hạn thời gian trả lời từng câu,UC-06,,AC-06,BR-12,M5,planned,💡; AC-06 phụ thuộc FR-12
+FR-13,FR,Could,Could,Tạm dừng và tiếp tục phiên,UC-05,,,BR-16,M5,planned,💡 Accepted proposal
+FR-14,FR,Must,Must,Kết thúc phiên sớm theo yêu cầu ứng viên,"UC-10",US-10,,BR-09,M5,planned,💡 Accepted proposal
+FR-15,FR,Must,Must,Truy xuất câu hỏi bằng RAG theo chủ đề JD,UC-06,,,NFR-15,M3,planned,✅ Confirmed
+FR-16,FR,Must,Must,Giao diện chat văn bản để AI hỏi và ứng viên trả lời,UC-06,US-05,,NFR-26,M5,planned,✅ Confirmed
+FR-17,FR,Must,Must,Chấm từng câu trả lời theo rubric; kết quả lưu không hiển thị trong phiên,"UC-07","US-06","AC-05","BR-01,BR-02,BR-20,NFR-13,NFR-14",M6,planned,✅ Confirmed; rủi ro chất lượng LLM tiếng Việt
+FR-18,FR,Must,Must,Sinh câu hỏi follow-up khi câu trả lời đạt ngưỡng,UC-08,US-07,AC-07,"BR-05,BR-06,BR-07",M6,planned,✅ Confirmed
+FR-19,FR,Must,Must,Chuyển sang câu/chủ đề khác khi không đạt hoặc hết lượt follow-up,UC-09,US-08,AC-08,"BR-04,BR-08",M5,planned,✅ Confirmed
+FR-20,FR,Must,Must,Giới hạn tối đa 2 follow-up liên tiếp cho mỗi câu gốc,UC-08,,AC-09,BR-05,M5,planned,✅ Confirmed
+FR-21,FR,Must,Must,Bảo đảm follow-up không lệch phạm vi chủ đề JD,UC-08,,AC-11,"BR-06,BR-07",M6,planned,✅ Confirmed
+FR-22,FR,Must,Must,Không lặp lại câu hỏi đã hỏi trong cùng phiên,UC-09,US-09,AC-10,,M5,planned,💡 Accepted proposal
+FR-23,FR,Must,Must,Lưu toàn bộ transcript của phiên,UC-06,,,BR-15,M5,planned,💡 Accepted proposal
+FR-24,FR,Must,Must,Xử lý AI lỗi/quá chậm: retry + provider dự phòng + câu hỏi từ pool,UC-06,,AC-14,"NFR-08,NFR-10,BR-18",M8,planned,💡 Accepted proposal
+FR-25,FR,Must,Must,Báo cáo điểm tổng và điểm theo chủ đề,UC-11,US-11,AC-12,"BR-10,BR-11,BR-13",M7,planned,✅ Confirmed
+FR-26,FR,Must,Must,Nhận xét từng câu (lý do chấm + ý chính còn thiếu); sinh khi tạo báo cáo,UC-11,,AC-12,BR-20,M7,planned,💡; rút gọn được nếu trễ
+FR-27,FR,Must,Must,Xác định chủ đề kiến thức yếu,UC-11,US-12,AC-12,BR-14,M7,planned,✅ Confirmed
+FR-28,FR,Must,Must,Từ chủ đề yếu mở nội dung ôn tập tương ứng,"UC-11,UC-12",US-12,AC-13,BR-14,M7,planned,✅ Confirmed; rút gọn được nếu trễ
+FR-29,FR,Should,Should,Danh sách và chi tiết các phiên đã làm,UC-13,,,,M7,planned,💡 Accepted proposal
+FR-30,FR,Could,Could,Biểu đồ tiến bộ giữa các phiên,UC-13,,,,"M7",planned,💡 Accepted proposal
+FR-31,FR,Should,Should,Duyệt và tìm kiếm Knowledge Hub độc lập theo chủ đề,UC-12,,,,"M3",planned,✅ Confirmed
+FR-32,FR,Must,Must,Quản lý ngân hàng câu hỏi (CRUD) kèm đáp án chuẩn và ý chính,UC-14,US-14,"AC-18,AC-19","BR-02,BR-19",M2,planned,✅ Confirmed
+FR-33,FR,Must,Must,Quản lý tài liệu kiến thức và lập chỉ mục embedding cho RAG,UC-15,,AC-19,"NFR-15,BR-19",M2,planned,✅ Confirmed
+FR-34,FR,Must,Must,Quản lý người dùng (khóa/mở tài khoản),UC-16,US-19,,"NFR-19",M1,planned,✅ Confirmed
+FR-35,FR,Could,Could,Thống kê sử dụng và lỗi AI,UC-16,,,,M8,planned,💡 Accepted proposal
+FR-37,FR,Must,Must,Quản lý danh mục chủ đề và từ khóa đồng nghĩa (alias),UC-14,US-15,,"BR-07",M2,planned,💡 Accepted proposal
+FR-38,FR,Must,Must,Thông báo rõ các chủ đề JD hệ thống chưa hỗ trợ,UC-04,US-16,AC-21,,M4,planned,💡 Accepted proposal
+FR-39,FR,Should,Should,Nhập hàng loạt câu hỏi từ CSV/JSON,UC-14,,,"BR-19",M2,planned,💡 Accepted proposal
+FR-40,FR,Could,Could,Luyện tập theo chủ đề không cần JD,,,,,M5,planned,💡 Accepted proposal
+FR-41,FR,Could,Could,Xuất báo cáo ra PDF,,,,,M7,planned,💡 Accepted proposal
+FR-42,FR,Should,Should,Tải file JD (PDF/DOCX),UC-03,,,"NFR-09",M4,planned,💡 Accepted proposal
+FR-43,FR,Must,Must,Tạo báo cáo bất đồng bộ với trạng thái GENERATING/READY/PARTIAL,"UC-10",US-17,"AC-22",,M7,planned,💡 Accepted proposal
+FR-36,FR,Won't,Won't,Phỏng vấn bằng giọng nói (STT/TTS),UC-17,,,NFR-23,–,excluded,✅ Excluded from MVP
+FR-03,FR,–,–,Nộp CV,UC-02,,,,–,removed,Đã loại theo quyết định chủ dự án
+FR-05,FR,–,–,Trích xuất thông tin từ CV,,,,,–,removed,Đã loại
+FR-08,FR,–,–,Phỏng vấn chỉ có CV,,,,,–,removed,Đã loại
+NFR-01,NFR,Must,Must,Câu hỏi đầu tiên hiển thị trong ≤10 giây sau tạo phiên,,,,,"M5,M3",planned,⚠️ Cần đo thực tế
+NFR-02,NFR,Must,Must,Từ lúc nộp câu trả lời đến câu tiếp theo ≤30 giây (mục tiêu 15s),,,,,"M6,M8",planned,⚠️ Cần đo thực tế
+NFR-03,NFR,Could,Could,Hiển thị câu hỏi dạng streaming (chữ hiện dần),,,,,,planned,⚠️ Chỉ MVP cần polling
+NFR-04,NFR,Must,Must,Chỉ báo AI đang xử lý; thời gian chờ AI không tính đồng hồ ứng viên,,US-05,AC-04,,M5,planned,💡 Accepted proposal
+NFR-05,NFR,Must,Must,Phân tích JD trong ≤30 giây,,,"AC-01",,M4,planned,⚠️ Cần đo thực tế
+NFR-06,NFR,Must,Must,Chỉ dùng LLM/embedding mã nguồn mở hoặc gói miễn phí,,,,,"M8",planned,✅ Confirmed
+NFR-07,NFR,Must,Must,Tầng truy cập AI trừu tượng hóa nhà cung cấp (provider-agnostic),,,,,"M8",planned,💡 Accepted proposal
+NFR-08,NFR,Must,Must,Xử lý rate limit + quota: retry có backoff + thông báo thân thiện,,,AC-14,,"M8",planned,💡 Accepted proposal
+NFR-09,NFR,Must,Must,Giới hạn số phiên/ngày/người dùng và độ dài đầu vào (bảo vệ quota),,,,,"M5,M8",planned,💡 Accepted proposal
+NFR-10,NFR,Must,Must,Fallback khi dịch vụ AI không khả dụng,,,AC-14,,"M8",planned,💡 Accepted proposal
+NFR-11,NFR,Must,Must,Đầu ra AI theo JSON có cấu trúc và được validate,,,AC-15,,"M6,M8",planned,💡 Accepted proposal
+NFR-12,NFR,Must,Must,Toàn bộ hệ thống chạy trên hosting miễn phí ≤512MB RAM mỗi service,,,,,"M1..M8",task01-done,✅ Confirmed
+NFR-13,NFR,Must,Must,Chấm nhất quán: chấm lại cùng câu lệch không quá ±10%,,,,,"M6",planned,⚠️ Cần đo thực tế
+NFR-14,NFR,Must,Must,Kết quả chấm kèm lý do để kiểm chứng,,,,,"M6",planned,💡 Accepted proposal
+NFR-15,NFR,Must,Must,Hạn chế ảo giác: đáp án chuẩn + ý chính + đoạn tài liệu vào ngữ cảnh chấm,,,,,"M3,M6",planned,💡 Accepted proposal
+NFR-16,NFR,Must,Must,Phiên đang chạy khôi phục khi tải lại trang hoặc mất kết nối ngắn,,,AC-17,,"M5",planned,💡 Accepted proposal
+NFR-17,NFR,Must,Must,Mật khẩu băm bcrypt/argon2; xác thực JWT,,,,,"M1",planned,💡 Accepted proposal
+NFR-18,NFR,Should,Should,Cho phép người dùng xóa dữ liệu của mình,,,,,"M1",planned,💡 Accepted proposal
+NFR-19,NFR,Must,Must,Phân quyền theo vai trò Candidate và Admin,,,,,"M1",planned,💡 Accepted proposal
+NFR-20,NFR,Must,Must,Chống prompt injection từ JD và câu trả lời,,,AC-16,,"M6,M8",planned,💡 Accepted proposal
+NFR-21,NFR,Should,Should,Thông báo người dùng JD/câu trả lời được gửi tới API bên thứ ba,,,,,"M4,M6",planned,💡 Accepted proposal
+NFR-22,NFR,Should,Should,Giao diện web responsive ưu tiên desktop,,,,,"FE",planned,💡 Accepted proposal
+NFR-23,NFR,Must,Must,Kiến trúc module hóa để thêm Voice sau mà không viết lại lõi phỏng vấn,,,,,"M5,M6",planned,💡 Accepted proposal
+NFR-24,NFR,Must,Must,Ghi log mỗi lần gọi AI (mục đích/nhà cung cấp/mô hình/thời gian/lỗi),,,,,"M8",planned,💡 Accepted proposal
+NFR-25,NFR,Must,Must,Phục vụ tối đa ~5 phiên đồng thời (giới hạn RPM API miễn phí),,,,,"M5,M8",planned,⚠️ Cần đo thực tế
+NFR-26,NFR,Must,Must,Tiếng Việt là ngôn ngữ chính; giao diện/câu hỏi/nhận xét/follow-up bằng tiếng Việt,,,AC-20,,"M4,M5,M6",planned,✅ Confirmed
+NFR-27,NFR,Must,Must,Thiết kế sẵn khả năng mở rộng tiếng Anh; không hard-code chuỗi và prompt,,,,,"M4,M5,M6",planned,✅ Confirmed
+NFR-28,NFR,Must,Must,LLM và embedding xử lý tốt tiếng Việt; có bộ kiểm thử nhỏ để chọn mô hình,,,,,"M3,M6",planned,💡 Accepted proposal; rủi ro lớn nhất
+NFR-29,NFR,Must,Must,Ngưỡng/trọng số/giới hạn follow-up ở cấu hình không hard-code,,,,,"M5,M6",planned,💡 Accepted proposal
+NFR-30,NFR,Must,Must,Mỗi service chạy được trong 512MB/0.1vCPU; JVM tinh chỉnh heap,,,,,"M1..M8",task01-done,💡 Accepted proposal
+NFR-31,NFR,Must,Must,Chịu được cold start; UI báo đang khởi động; không tính vào đồng hồ ứng viên,UC-18,"US-18",AC-23,,"M5,M8",planned,💡 Accepted proposal
+NFR-32,NFR,Must,Must,Ngân sách AI: tối đa ~20 lệnh gọi LLM/phiên; có bộ đếm quota,,,,,"M5,M8",planned,💡 Mở rộng NFR-09
+NFR-33,NFR,Must,Must,Phát triển được trên máy 4GB không GPU; không bắt buộc Docker,,,,,"M1..M8",task01-done,✅ Confirmed
+BR-01,BR,Must,Must,Rubric: Chính xác 50% / Đầy đủ 30% / Rõ ràng 10% / Ví dụ 10%; LLM trả tiêu chí; Java tính tổng,,,"AC-05",,"M6,M7",planned,✅ Confirmed
+BR-02,BR,Must,Must,Mỗi câu hỏi có đáp án chuẩn + ý chính; chấm dựa trên dữ liệu không chỉ LLM,,,,,"M2,M6",planned,💡 Accepted proposal
+BR-03,BR,Must,Must,Phân loại điểm câu: ≥70% Tốt; 40–69% Trung bình; <40% Yếu,,,"AC-07,AC-08",,"M5,M6",planned,✅ Confirmed
+BR-04,BR,Must,Must,Chuyển chủ đề khi hết câu/đạt giới hạn follow-up/câu yếu; theo thứ tự ưu tiên JD,UC-09,,,,M5,planned,✅ Confirmed
+BR-05,BR,Must,Must,Điều kiện hỏi follow-up: điểm ≥70%; <2 follow-up liên tiếp; còn thời gian và số câu,UC-08,,AC-07,,"M5",planned,✅ Confirmed
+BR-06,BR,Must,Must,Follow-up bám nội dung câu trả lời vừa rồi; thuộc chủ đề JD; không trùng; độ khó ≥ câu gốc,UC-08,,AC-11,,"M6",planned,💡 Accepted proposal
+BR-07,BR,Must,Must,Phạm vi câu hỏi hoàn toàn theo JD; CV không được dùng,,,,,"M4,M5",planned,✅ Confirmed
+BR-08,BR,Must,Must,Độ khó khởi điểm từ level JD; tăng/giảm theo chuỗi Tốt/Yếu,,,,,"M5",planned,💡 Accepted proposal
+BR-09,BR,Must,Must,Phiên kết thúc khi: hết giờ / đủ số câu / hết chủ đề / ứng viên kết thúc sớm,,US-10,"AC-06",,"M5",planned,✅ Confirmed
+BR-10,BR,Must,Must,Điểm chủ đề = trung bình điểm các câu; follow-up có trọng số bằng câu gốc,,,"AC-12",,"M7",planned,💡 Accepted proposal
+BR-11,BR,Must,Must,Điểm tổng = trung bình có trọng số; kỹ năng bắt buộc JD có trọng số ×1.5,,,"AC-12",,"M7",planned,💡 Accepted proposal
+BR-12,BR,Must,Must,Câu bỏ qua/không trả lời/hết giờ được 0 điểm và tính là điểm yếu,,,"AC-06",,"M5,M7",planned,💡 Accepted proposal
+BR-13,BR,Must,Must,Xếp loại tổng: ≥80 Rất tốt; 65–79 Khá; 50–64 Trung bình; <50 Cần cải thiện,,,"AC-12",,"M7",planned,💡 Accepted proposal
+BR-14,BR,Must,Must,Chủ đề yếu: điểm <50% hoặc có ≥2 câu Yếu; gắn ý chính thiếu và nội dung học,,,"AC-12,AC-13",,"M7",planned,✅ Confirmed
+BR-15,BR,Must,Must,Chỉ ứng viên sở hữu mới xem được JD/phiên/kết quả của mình,,,,,"M1,M5",planned,💡 Accepted proposal
+BR-16,BR,Must,Must,Trạng thái phiên: CREATED → IN_PROGRESS → COMPLETED/TIMED_OUT/CANCELLED,,,,,"M5",planned,💡 Accepted proposal
+BR-17,BR,Must,Must,Câu trả lời đã gửi không sửa được,,,,,"M5",planned,💡 Accepted proposal
+BR-18,BR,Must,Must,Khi AI không chấm được sau số lần thử lại: lượt là UNGRADED; không tính vào điểm,,,AC-15,,"M6,M8",planned,💡 Accepted proposal
+BR-19,BR,Must,Must,Admin chỉ xuất bản câu hỏi khi đủ trường bắt buộc (chủ đề/level/nội dung/đáp án/ý chính),,US-14,AC-18,,"M2",planned,💡 Accepted proposal
+BR-20,BR,Must,Must,Trong lúc phiên diễn ra không API nào trả điểm/nhận xét cho ứng viên,,US-06,"AC-05,AC-12",,"M5,M7",planned,✅ Confirmed
+UC-01,UC,Must,Must,Đăng ký và đăng nhập,,"(nền tảng)",,,"M1",planned,
+UC-03,UC,Must,Must,Nộp JD,"","US-02,US-16","AC-01,AC-02",,"M4",planned,
+UC-04,UC,Must,Must,Phân tích JD và xác nhận chủ đề,,"US-03,US-16","AC-01,AC-03,AC-21",,"M4",planned,
+UC-05,UC,Must,Must,Cấu hình và bắt đầu phiên,,"US-04,US-05","AC-04",,"M5",planned,
+UC-06,UC,Must,Must,Thực hiện phỏng vấn (chat có tính giờ),"","US-05..US-09","AC-04,AC-05,AC-07..AC-17",,"M5,M6",planned,
+UC-07,UC,Must,Must,Đánh giá câu trả lời,,"US-06","AC-05",,"M6",planned,
+UC-08,UC,Must,Must,Sinh follow-up,,"US-07","AC-07,AC-09,AC-11",,"M6",planned,
+UC-09,UC,Must,Must,Chuyển câu hoặc chủ đề,,"US-08,US-09","AC-08,AC-10",,"M5",planned,
+UC-10,UC,Must,Must,Kết thúc phiên và kích hoạt báo cáo,,"US-10,US-17","AC-06,AC-22",,"M5,M7",planned,
+UC-11,UC,Must,Must,Xem báo cáo và kiến thức yếu,,"US-11,US-12","AC-12,AC-13",,"M7",planned,
+UC-12,UC,Must,Must,Xem nội dung ôn tập,,"US-12","AC-13",,"M3,M7",planned,
+UC-13,UC,Should,Should,Xem lịch sử và tiến bộ,,,,,M7,planned,
+UC-14,UC,Must,Must,Quản lý ngân hàng câu hỏi và danh mục chủ đề,,"US-14,US-15","AC-18,AC-19",,"M2",planned,
+UC-15,UC,Must,Must,Quản lý tài liệu và lập chỉ mục,,,AC-19,,"M2,M3",planned,
+UC-16,UC,Must,Must (người dùng) / Could (thống kê),Quản lý người dùng và xem thống kê,,"US-19",,"NFR-19","M1,M8",planned,
+UC-17,UC,Won't,Won't,Phỏng vấn bằng giọng nói,,,,,–,excluded,
+UC-18,UC,Must,Must,Khởi động hệ thống (warm-up),,US-18,AC-23,"NFR-31","M5,M8",planned,
+US-02,US,Must,Must,Là ứng viên tôi muốn nộp JD để buổi phỏng vấn bám sát JD,,"UC-03,UC-04","AC-01,AC-02","FR-04,FR-06",,planned,
+US-03,US,Must,Must,Xem và chỉnh chủ đề và level từ JD,,"UC-04","AC-03","FR-07",,planned,
+US-04,US,Must,Must,Chọn số câu và thời lượng,,"UC-05","","FR-10",,planned,
+US-05,US,Must,Must,Trả lời qua khung chat có đồng hồ đếm,,"UC-06","AC-04","FR-11,FR-16",,planned,
+US-06,US,Must,Must,Câu trả lời được AI đánh giá; kết quả chỉ hiện ở báo cáo cuối,,"UC-07","AC-05","FR-17,BR-20",,planned,
+US-07,US,Must,Must,Được hỏi sâu khi trả lời tốt,,"UC-08","AC-07","FR-18,FR-20,FR-21",,planned,
+US-08,US,Must,Must,Chuyển chủ đề khi trả lời chưa tốt,,"UC-09","AC-08","FR-19",,planned,
+US-09,US,Must,Must,Không bị hỏi lại câu đã hỏi,,"UC-09","AC-10","FR-22",,planned,
+US-10,US,Must,Must,Kết thúc phiên sớm khi cần,,"UC-10","","FR-14",,planned,
+US-11,US,Must,Must,Xem điểm tổng và điểm từng chủ đề sau phỏng vấn,,"UC-11","AC-12","FR-25",,planned,
+US-12,US,Must,Must,Biết rõ kiến thức yếu kèm nội dung ôn,,"UC-11,UC-12","AC-13","FR-27,FR-28",,planned,
+US-13,US,Must,Must,Phiên không bị mất khi tải lại trang hoặc mất mạng ngắn,,"UC-06","AC-17","NFR-16",,planned,
+US-14,US,Must,Must,Admin thêm và sửa câu hỏi kèm đáp án chuẩn và ý chính,,"UC-14","AC-18","FR-32,FR-33",,planned,
+US-15,US,Must,Must,Admin quản lý danh mục chủ đề và từ khóa đồng nghĩa,,"UC-14","","FR-37",,planned,
+US-16,US,Must,Must,Biết chủ đề JD hệ thống chưa hỗ trợ,,"UC-04","AC-21","FR-38",,planned,
+US-17,US,Must,Must,Vẫn nhận được điểm và kiến thức yếu dù AI lỗi khi sinh nhận xét,,"UC-10","AC-22","FR-43",,planned,
+US-18,US,Must,Must,Thấy hệ thống đang khởi động thay vì thông báo lỗi,,"UC-18","AC-23","NFR-31",,planned,
+US-19,US,Must,Must,Admin khóa/mở tài khoản người dùng,,"UC-16","","FR-34",,planned,
+AC-01,AC,Must,Must,Dán JD hợp lệ → hiển thị chủ đề trong ≤30 giây,,"US-02","","NFR-05,FR-04,FR-06",,planned,
+AC-02,AC,Must,Must,JD rỗng hoặc quá dài → báo lỗi rõ và không tạo phiên,,"US-02","","FR-04",,planned,
+AC-03,AC,Must,Must,Chỉnh chủ đề/level → phiên dùng danh sách sau chỉnh,,"US-03","","FR-07",,planned,
+AC-04,AC,Must,Must,Đồng hồ chạy khi hỏi; tạm dừng khi AI xử lý,,"US-05","","NFR-04,FR-11",,planned,
+AC-05,AC,Must,Must,Gửi câu trả lời → lưu điểm 4 tiêu chí; không trả điểm/nhận xét khi phiên còn chạy,,"US-06","","BR-01,BR-20,FR-17",,planned,
+AC-06,AC,Must,Must,Phiên hết giờ khi câu chưa trả lời → câu đó 0 điểm; phiên TIMED_OUT; báo cáo được kích hoạt,,,,"BR-09,BR-12,FR-10",,planned,Note: phụ thuộc FR-12 cho hết giờ từng câu
+AC-07,AC,Must,Must,Điểm ≥70% + <2 follow-up + còn thời gian → đúng một follow-up bám nội dung và đúng phạm vi JD,,"US-07","","BR-05,FR-18",,planned,
+AC-08,AC,Must,Must,Điểm <70% → không sinh follow-up; chuyển câu/chủ đề tiếp theo,,"US-08","","BR-03,FR-19",,planned,
+AC-09,AC,Must,Must,Đã hỏi đủ 2 follow-up → chuyển sang câu gốc mới,,,,"FR-20,BR-05",,planned,
+AC-10,AC,Must,Must,Câu đã hỏi → không xuất hiện lại,,"US-09","","FR-22",,planned,
+AC-11,AC,Must,Must,Follow-up không có chủ đề nào nằm ngoài danh sách chủ đề JD,,,,"FR-21,BR-06",,planned,
+AC-12,AC,Must,Must,Báo cáo sau khi phiên kết thúc: điểm tổng / điểm chủ đề / nhận xét / danh sách chủ đề yếu; từ chối trước khi phiên kết thúc,,"US-11","","BR-14,BR-20,FR-25,FR-26,FR-27",,planned,
+AC-13,AC,Must,Must,Chủ đề yếu hiển thị ý chính còn thiếu và liên kết nội dung ôn,,"US-12","","BR-14,FR-28",,planned,
+AC-14,AC,Must,Must,AI lỗi/vượt hạn mức → thử lại → provider dự phòng; ứng viên nhận thông báo thân thiện; không mất dữ liệu,,,,"NFR-08,NFR-10,FR-24",,planned,
+AC-15,AC,Must,Must,AI trả sai định dạng → validate và thử lại; vẫn lỗi → UNGRADED; không ảnh hưởng điểm,,,,"NFR-11,BR-18",,planned,
+AC-16,AC,Must,Must,Chỉ dẫn prompt injection trong JD/câu trả lời → điểm vẫn theo rubric,,,,"NFR-20",,planned,
+AC-17,AC,Must,Must,Tải lại trang giữa phiên → tiếp tục từ câu hiện tại với hội thoại và thời gian chính xác,,"US-13","","NFR-16",,planned,
+AC-18,AC,Must,Must,Admin lưu câu hỏi thiếu đáp án/ý chính → hệ thống từ chối và chỉ ra trường thiếu,,"US-14","","BR-19,FR-32",,planned,
+AC-19,AC,Must,Must,Câu hỏi/tài liệu mới được lưu và lập chỉ mục → có thể truy xuất trong phiên sau; chưa lập chỉ mục không được chọn,,,,"FR-33,FR-32",,planned,
+AC-20,AC,Must,Must,Câu hỏi/follow-up/nhận xét bằng tiếng Việt; thuật ngữ Java giữ nguyên tiếng Anh,,,,"NFR-26",,planned,
+AC-21,AC,Must,Must,JD có chủ đề chưa hỗ trợ → hệ thống liệt kê chủ đề đó cho ứng viên,,"US-16","","FR-38",,planned,
+AC-22,AC,Must,Must,Sinh nhận xét LLM lỗi → báo cáo PARTIAL vẫn hiển thị điểm + ý chính thiếu + tài liệu ôn,,"US-17","","FR-43",,planned,
+AC-23,AC,Must,Must,Hệ thống đang cold start → UI hiển thị trạng thái chờ và tự thử lại; không báo lỗi,,"US-18","","NFR-31",,planned,
+
+# --- Task 01 implementation status overrides ---
+# NFR-12: task01-done — pom.xml JVM flags -Xmx320m; Python no torch
+# NFR-30: task01-done — backend/pom.xml spring-boot-maven-plugin jvmArguments; ai-service/requirements.txt no torch
+# NFR-33: task01-done — H2 test profile; mock provider; no Docker required; .env.example documented
+# UC-18:  task01-partial — GET /api/v1/system/warmup implemented; parallel AI health call deferred to Task 07
+# NFR-31: task01-partial — warmup endpoint exists; cold-start retry/UI logic deferred to Task 08

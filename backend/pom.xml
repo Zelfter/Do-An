@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.5</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.example</groupId>
+    <artifactId>interview-backend</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>interview-backend</name>
+    <description>Java backend — AI Interview practice app (SRS §10.1)</description>
+
+    <properties>
+        <java.version>21</java.version>
+        <!-- NFR-30: tinh chỉnh heap cho 512 MB -->
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <jjwt.version>0.12.6</jjwt.version>
+
+        <!-- Flyway Maven plugin defaults (standalone `mvn flyway:migrate`) — Task 02
+             The Maven plugin does NOT read Spring Boot's application.yml; it uses these.
+             Defaults mirror local-dev (Docker postgres:16, db=interview_dev).
+             Override on CLI: -Dflyway.url=... -Dflyway.user=... -Dflyway.password=...
+                              -Dseed.admin.email=... -Dseed.admin.password=...
+             NOTE: the `flyway.` prefix is reserved by the plugin for its own config params
+             (url/user/password/...). The admin-seed values use a separate `seed.` prefix
+             and are passed in via the <placeholders> block of the plugin below.
+             Version inherited from spring-boot-dependencies (flyway.version=10.10.0). -->
+        <flyway.url>jdbc:postgresql://localhost:5432/interview_dev</flyway.url>
+        <flyway.user>postgres</flyway.user>
+        <flyway.password>postgres</flyway.password>
+        <seed.admin.email>admin@example.com</seed.admin.email>
+        <seed.admin.password>ChangeMe123!</seed.admin.password>
+    </properties>
+
+    <dependencies>
+        <!-- Web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Security — NFR-17, NFR-19 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- JPA + PostgreSQL — SRS §10.5 schema app -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Flyway — DB migrations V001–V010 -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+        </dependency>
+
+        <!-- Bean Validation — design.md §6 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!-- JWT — NFR-17, FR-01-JWT -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>${jjwt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>${jjwt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Actuator — health endpoint cho warm-up UC-18 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- H2 in-memory DB for tests — NFR-33 (không dùng Neon trong unit test) -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- NFR-30: JVM options cho 512 MB trên Render -->
+                    <jvmArguments>
+                        -Xms64m -Xmx320m -XX:+UseSerialGC
+                        -XX:MaxMetaspaceSize=128m
+                    </jvmArguments>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>21</source>
+                    <target>21</target>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+
+            <!-- Flyway Maven plugin — standalone `mvn flyway:migrate` (Task 02, SRS §10.5)
+                 NOTE: This plugin does NOT read Spring Boot's application.yml. It uses the
+                 <configuration> below plus the flyway.* properties defined above.
+                 PostgreSQL support in Flyway 10.x is a separate module, added as a plugin
+                 dependency alongside the JDBC driver. -->
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>${flyway.version}</version>
+                <configuration>
+                    <url>${flyway.url}</url>
+                    <user>${flyway.user}</user>
+                    <password>${flyway.password}</password>
+                    <schemas>app</schemas>
+                    <defaultSchema>app</defaultSchema>
+                    <locations>
+                        <location>filesystem:src/main/resources/db/migration</location>
+                    </locations>
+                    <baselineOnMigrate>false</baselineOnMigrate>
+                    <!-- Placeholders consumed by V010 (admin seed).
+                         Flyway placeholder syntax is strictly ${name} (no ${name:default}),
+                         so the migration uses ${admin_email}/${admin_password} and the
+                         actual values (with dev defaults) come from the properties above. -->
+                    <placeholders>
+                        <admin_email>${seed.admin.email}</admin_email>
+                        <admin_password>${seed.admin.password}</admin_password>
+                    </placeholders>
+                </configuration>
+                <dependencies>
+                    <!-- Flyway 10.x: database-specific support lives in its own module -->
+                    <dependency>
+                        <groupId>org.flywaydb</groupId>
+                        <artifactId>flyway-database-postgresql</artifactId>
+                        <version>${flyway.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>${postgresql.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+</project>
