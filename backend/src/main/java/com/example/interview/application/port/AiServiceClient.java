@@ -52,4 +52,26 @@ public interface AiServiceClient {
      */
     boolean indexDocument(UUID documentId, String topicCode, String language,
                           String title, String contentMd);
+
+    /**
+     * Analyses a raw job description (Python owns JD extraction — design §4).
+     *
+     * @return suggested level (JUNIOR/MID/SENIOR) and raw terms with importance;
+     *         Java maps raw terms to known topics and makes the selection decision.
+     */
+    AiResults.JdAnalysisResult analyzeJd(String rawText);
+
+    /**
+     * Evaluates a candidate answer against the rubric (Python owns criterion
+     * suggestions — design §4). Returns per-criterion scores (0–10); Java computes
+     * the weighted total (BR-01) and decides follow-up eligibility (BR-05).
+     */
+    AiResults.TurnEvaluationResult evaluateTurn(String questionText, String referenceAnswer,
+                                                List<String> keyPoints, String answerText, String level);
+
+    /**
+     * Generates the report prose summary (Python owns report prose — design §4).
+     * On failure the caller falls back to a PARTIAL report (AC-22), preserving scores.
+     */
+    AiResults.ReportProse generateReport(AiResults.ReportContext context);
 }

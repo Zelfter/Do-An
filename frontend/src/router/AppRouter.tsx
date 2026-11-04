@@ -18,11 +18,17 @@
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import LoginPage from '../pages/LoginPage'
+import RegisterPage from '../pages/RegisterPage'
 import AdminLayout from '../pages/admin/AdminLayout'
 import TopicsPage from '../pages/admin/TopicsPage'
 import QuestionsPage from '../pages/admin/QuestionsPage'
 import DocumentsPage from '../pages/admin/DocumentsPage'
 import UsersPage from '../pages/admin/UsersPage'
+import CandidateLayout from '../pages/candidate/CandidateLayout'
+import CandidateDashboard from '../pages/candidate/CandidateDashboard'
+import NewInterviewPage from '../pages/candidate/NewInterviewPage'
+import InterviewReportPage from '../pages/candidate/InterviewReportPage'
+import InterviewRoomPage from '../pages/interview/InterviewRoomPage'
 
 // ─── Route guard ──────────────────────────────────────────────────────────────
 
@@ -45,6 +51,18 @@ export function PrivateRoute({ requiredRole }: { requiredRole?: 'ADMIN' | 'CANDI
   return <Outlet />
 }
 
+/** Redirects root/404 by auth state: admin → /admin, candidate → /dashboard, else /login. */
+function HomeRedirect() {
+  const { user, loading } = useAuth()
+  if (loading) {
+    return <div aria-live="polite">Đang tải…</div>
+  }
+  if (!user) {
+    return <Navigate to="/login" replace />
+  }
+  return <Navigate to={user.role === 'ADMIN' ? '/admin' : '/dashboard'} replace />
+}
+
 // ─── Route configuration (separated for testing with MemoryRouter) ────────────
 
 export function AppRoutes() {
@@ -52,6 +70,7 @@ export function AppRoutes() {
     <Routes>
       {/* Public routes */}
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
 
       {/* Admin routes — require ADMIN role */}
       <Route element={<PrivateRoute requiredRole="ADMIN" />}>
@@ -64,11 +83,18 @@ export function AppRoutes() {
         </Route>
       </Route>
 
-      {/* Default: redirect root to login */}
-      <Route path="/" element={<Navigate to="/login" replace />} />
+      {/* Candidate routes — require CANDIDATE role */}
+      <Route element={<PrivateRoute requiredRole="CANDIDATE" />}>
+        <Route path="/dashboard" element={<CandidateLayout><CandidateDashboard /></CandidateLayout>} />
+        <Route path="/interview/new" element={<CandidateLayout><NewInterviewPage /></CandidateLayout>} />
+        {/* The room is full-screen (its own header) — not wrapped in the layout */}
+        <Route path="/interview/:sessionId" element={<InterviewRoomPage />} />
+        <Route path="/interview/:sessionId/report" element={<CandidateLayout><InterviewReportPage /></CandidateLayout>} />
+      </Route>
 
-      {/* 404 fallback */}
-      <Route path="*" element={<Navigate to="/login" replace />} />
+      {/* Default + 404: redirect by role (logged in → home, else login) */}
+      <Route path="/" element={<HomeRedirect />} />
+      <Route path="*" element={<HomeRedirect />} />
     </Routes>
   )
 }

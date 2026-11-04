@@ -1,5 +1,8 @@
 #!/bin/bash
-ROOT="/home/zenos/Downloads/Do An/kiro-srs-ai-interview-config"
+# Resolve to the directory containing this script so the script works from any
+# clone/location (it previously hard-coded a path that pointed at a different
+# copy without the register feature).
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOGDIR="/tmp/interview-logs"
 mkdir -p "$LOGDIR"
 get_env() { grep "^$1=" "$ROOT/.env" | head -1 | cut -d= -f2-; }

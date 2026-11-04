@@ -5,7 +5,7 @@ Cách chạy:
 bash
 bash start-dev.sh
 Cách dừng:
-pkill -f "uvicorn\|spring-boot\|vite
+bash stop.sh
 ---
 
 ## Mục lục
@@ -276,7 +276,7 @@ Endpoint `/api/v1/auth/register` công khai — người đăng ký mới luôn 
 
 ```bash
 curl -X POST http://localhost:8080/api/v1/auth/register \
-  -H "Content-Type: application/json" \
+  -H "Content-Type: application/json" 
   -d '{"email":"candidate@example.com","password":"Password123!"}'
 ```
 

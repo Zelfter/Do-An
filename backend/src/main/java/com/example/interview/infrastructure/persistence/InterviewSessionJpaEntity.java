@@ -53,6 +53,13 @@ public class InterviewSessionJpaEntity {
     @Column(name = "total_score", precision = 5, scale = 2)
     private BigDecimal totalScore;
 
+    /**
+     * NFR-16: wall-clock time when the current answering window started.
+     * Null while the AI is grading (timer paused) or after the session has ended.
+     */
+    @Column(name = "resume_at")
+    private Instant resumeAt;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt = Instant.now();
 
@@ -79,6 +86,8 @@ public class InterviewSessionJpaEntity {
     public void setConfigSnapshot(String s) { this.configSnapshot = s; }
     public BigDecimal getTotalScore() { return totalScore; }
     public void setTotalScore(BigDecimal s) { this.totalScore = s; }
+    public Instant getResumeAt() { return resumeAt; }
+    public void setResumeAt(Instant r) { this.resumeAt = r; }
     public Instant getCreatedAt() { return createdAt; }
     public Instant getUpdatedAt() { return updatedAt; }
 }

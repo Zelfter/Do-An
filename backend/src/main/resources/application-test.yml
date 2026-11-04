@@ -1,7 +1,7 @@
 # Test profile — NFR-33: H2 in-memory, no real Neon, no real AI calls
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;NON_KEYWORDS=KEY,VALUE,RANK
     username: sa
     password:
     driver-class-name: org.h2.Driver

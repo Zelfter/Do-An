@@ -2,18 +2,27 @@
  * LoginPage — NFR-26: all UI text in Vietnamese.
  * AC-AUTH-03/04/07: handles 200, 401, 403 responses.
  */
-import React, { FormEvent, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { FormEvent, useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 
 export default function LoginPage() {
-  const { login } = useAuth()
+  const { login, user } = useAuth()
   const navigate = useNavigate()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
+  // Becomes true only after a successful login submit; used to navigate by role.
+  const [submitted, setSubmitted] = useState(false)
+
+  // After a successful login the AuthContext resolves the user; redirect by role.
+  useEffect(() => {
+    if (submitted && user) {
+      navigate(user.role === 'ADMIN' ? '/admin' : '/dashboard', { replace: true })
+    }
+  }, [submitted, user, navigate])
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -22,7 +31,7 @@ export default function LoginPage() {
 
     try {
       await login(email, password)
-      navigate('/admin', { replace: true })
+      setSubmitted(true)
     } catch (err: unknown) {
       // Map HTTP status codes to Vietnamese messages (AC-AUTH-04, AC-AUTH-07)
       const status = getStatus(err)
@@ -90,6 +99,13 @@ export default function LoginPage() {
             {submitting ? 'Đang đăng nhập…' : 'Đăng nhập'}
           </button>
         </form>
+
+        <p style={styles.footerText}>
+          Chưa có tài khoản?{' '}
+          <Link to="/register" style={styles.link}>
+            Đăng ký
+          </Link>
+        </p>
       </div>
     </main>
   )
@@ -155,5 +171,15 @@ const styles: Record<string, React.CSSProperties> = {
     borderRadius: 4,
     fontSize: '1rem',
     cursor: 'pointer',
+  },
+  footerText: {
+    marginTop: '1.25rem',
+    textAlign: 'center',
+    fontSize: '0.875rem',
+    color: '#555',
+  },
+  link: {
+    color: '#1677ff',
+    textDecoration: 'none',
   },
 }
