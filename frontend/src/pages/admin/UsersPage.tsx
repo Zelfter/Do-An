@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react'
 import { useAuth } from '../../contexts/AuthContext'
 import { listUsers, updateUserStatus, type UserDto } from '../../api/userApi'
 import { adminStyles } from '../../components/shared/adminStyles'
+import { IconLock } from '../../components/ui/icons'
 
 const STATUS_LABELS: Record<string, string> = {
   ACTIVE: 'Hoạt động',
@@ -28,6 +29,11 @@ function getStatus(err: unknown): number | null {
     return (err.response as { status: number }).status
   }
   return null
+}
+
+function initials(email: string): string {
+  const name = email.split('@')[0]
+  return name.slice(0, 2).toUpperCase()
 }
 
 export default function UsersPage() {
@@ -79,73 +85,74 @@ export default function UsersPage() {
   return (
     <div style={adminStyles.page}>
       <div style={adminStyles.pageHeader}>
-        <h1 style={adminStyles.pageHeading}>Quản lý người dùng</h1>
+        <div>
+          <h1 style={adminStyles.pageHeading}>Quản lý người dùng</h1>
+          <p className="muted" style={{ margin: '6px 0 0', fontSize: '.88rem' }}>Xem và quản lý trạng thái tài khoản trong hệ thống</p>
+        </div>
       </div>
 
-      {/* Filters */}
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem', alignItems: 'center' }}>
-        <label style={{ fontSize: '0.9rem' }}>
-          Vai trò:{' '}
-          <select style={{ ...adminStyles.select, width: 'auto' }} value={filterRole} onChange={(e) => setFilterRole(e.target.value)}>
-            <option value="">Tất cả</option>
-            <option value="ADMIN">Quản trị</option>
-            <option value="CANDIDATE">Ứng viên</option>
-          </select>
-        </label>
-        <label style={{ fontSize: '0.9rem' }}>
-          Trạng thái:{' '}
-          <select style={{ ...adminStyles.select, width: 'auto' }} value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
-            <option value="">Tất cả</option>
-            <option value="ACTIVE">Hoạt động</option>
-            <option value="LOCKED">Bị khóa</option>
-          </select>
-        </label>
+      <div className="users-toolbar">
+        <div className="users-filters">
+          <label className="filter-control">
+            <span>Vai trò</span>
+            <select className="input" value={filterRole} onChange={(e) => setFilterRole(e.target.value)}>
+              <option value="">Tất cả</option>
+              <option value="ADMIN">Quản trị</option>
+              <option value="CANDIDATE">Ứng viên</option>
+            </select>
+          </label>
+          <label className="filter-control">
+            <span>Trạng thái</span>
+            <select className="input" value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
+              <option value="">Tất cả</option>
+              <option value="ACTIVE">Hoạt động</option>
+              <option value="LOCKED">Bị khóa</option>
+            </select>
+          </label>
+        </div>
+        {!loading && <span className="history-count">{users.length} người dùng</span>}
       </div>
 
       {errorMsg && <p role="alert" style={adminStyles.errorText}>{errorMsg}</p>}
       {successMsg && <p style={adminStyles.successText}>{successMsg}</p>}
 
       {loading ? (
-        <p>Đang tải…</p>
+        <div className="card"><p className="muted">Đang tải danh sách người dùng…</p></div>
       ) : users.length === 0 ? (
-        <p>Chưa có người dùng nào.</p>
+        <div className="card empty">Chưa có người dùng nào phù hợp với bộ lọc.</div>
       ) : (
-        <table style={adminStyles.table}>
-          <thead>
-            <tr>
-              <th style={adminStyles.th}>Email</th>
-              <th style={adminStyles.th}>Vai trò</th>
-              <th style={adminStyles.th}>Trạng thái</th>
-              <th style={adminStyles.th}>Thao tác</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((u) => {
-              const isSelf = currentUser?.id === u.id
-              return (
-                <tr key={u.id}>
-                  <td style={adminStyles.td}>{u.email}{isSelf && <span style={{ color: '#888', fontSize: '0.8rem' }}> (bạn)</span>}</td>
-                  <td style={adminStyles.td}>{ROLE_LABELS[u.role] ?? u.role}</td>
-                  <td style={adminStyles.td}>
-                    <span style={{ ...adminStyles.badge, ...(u.status === 'ACTIVE' ? adminStyles.badgeActive : adminStyles.badgeInactive) }}>
-                      {STATUS_LABELS[u.status] ?? u.status}
-                    </span>
-                  </td>
-                  <td style={adminStyles.td}>
-                    <button
-                      style={adminStyles.smallButton}
-                      onClick={() => handleToggleLock(u)}
-                      disabled={isSelf}
-                      title={isSelf ? 'Không thể khóa chính mình' : undefined}
-                    >
-                      {u.status === 'ACTIVE' ? 'Khóa' : 'Mở khóa'}
-                    </button>
-                  </td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
+        <div className="table-wrap users-table-card">
+          <table className="table">
+            <thead><tr><th>EMAIL</th><th>VAI TRÒ</th><th>TRẠNG THÁI</th><th>THAO TÁC</th></tr></thead>
+            <tbody>
+              {users.map((u) => {
+                const isSelf = currentUser?.id === u.id
+                return (
+                  <tr key={u.id}>
+                    <td>
+                      <div className="user-email-cell">
+                        <span className="user-avatar">{initials(u.email)}</span>
+                        <span><span className="user-email-main">{u.email}</span>{isSelf && <span className="user-self">(bạn)</span>}</span>
+                      </div>
+                    </td>
+                    <td><span className="badge badge-brand">{ROLE_LABELS[u.role] ?? u.role}</span></td>
+                    <td><span className={'badge ' + (u.status === 'ACTIVE' ? 'badge-success' : 'badge-danger')}>{STATUS_LABELS[u.status] ?? u.status}</span></td>
+                    <td>
+                      <button
+                        className={'btn btn-sm users-action ' + (u.status === 'ACTIVE' ? 'btn-danger' : 'btn-success')}
+                        onClick={() => handleToggleLock(u)}
+                        disabled={isSelf}
+                        title={isSelf ? 'Không thể khóa chính mình' : undefined}
+                      >
+                        {u.status === 'ACTIVE' ? <><IconLock size={15} /> Khóa</> : 'Mở khóa'}
+                      </button>
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   )

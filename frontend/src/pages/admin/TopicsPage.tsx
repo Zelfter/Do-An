@@ -27,6 +27,7 @@ import {
 } from '../../api/topicApi'
 import { adminStyles } from '../../components/shared/adminStyles'
 import ConfirmDialog from '../../components/shared/ConfirmDialog'
+import { IconEdit, IconTag, IconTrash } from '../../components/ui/icons'
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -249,45 +250,36 @@ export default function TopicsPage() {
       {successMsg && !formOpen && <p style={adminStyles.successText}>{successMsg}</p>}
 
       {loading ? (
-        <p>Đang tải…</p>
+        <div className="admin-card"><p className="muted" style={{ padding: 24 }}>Đang tải…</p></div>
       ) : topics.length === 0 ? (
-        <p>Chưa có chủ đề nào.</p>
+        <div className="admin-card admin-empty">
+          <h3>Chưa có chủ đề nào</h3>
+          <p>Thêm chủ đề đầu tiên để bắt đầu xây dựng ngân hàng kiến thức.</p>
+          <button type="button" className="btn btn-primary" onClick={openCreate}>+ Thêm chủ đề</button>
+          <span style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)' }}>Chưa có chủ đề nào.</span>
+        </div>
       ) : (
-        <table style={adminStyles.table}>
-          <thead>
-            <tr>
-              <th style={adminStyles.th}>Mã</th>
-              <th style={adminStyles.th}>Tên (vi)</th>
-              <th style={adminStyles.th}>Trạng thái</th>
-              <th style={adminStyles.th}>Alias</th>
-              <th style={adminStyles.th}>Thao tác</th>
-            </tr>
-          </thead>
-          <tbody>
-            {topics.map((topic) => (
-              <tr key={topic.id}>
-                <td style={adminStyles.td}>{topic.code}</td>
-                <td style={adminStyles.td}>{displayName(topic)}</td>
-                <td style={adminStyles.td}>
-                  <span style={{ ...adminStyles.badge, ...(topic.isActive ? adminStyles.badgeActive : adminStyles.badgeInactive) }}>
-                    {topic.isActive ? 'Hoạt động' : 'Tắt'}
-                  </span>
-                </td>
-                <td style={adminStyles.td}>{topic.aliases.length}</td>
-                <td style={adminStyles.td}>
-                  <button style={adminStyles.smallButton} onClick={() => openEdit(topic)}>Sửa</button>
-                  <button style={adminStyles.smallButton} onClick={() => handleToggleActive(topic)}>
-                    {topic.isActive ? 'Tắt' : 'Bật'}
-                  </button>
-                  <button style={adminStyles.smallButton} onClick={() => openAliases(topic)}>Alias</button>
-                  <button style={{ ...adminStyles.smallButton, color: '#ff4d4f' }} onClick={() => setDeletingId(topic.id)}>
-                    Xóa
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="admin-card">
+          <table className="admin-table">
+            <thead><tr><th>Mã</th><th>Tên (vi)</th><th>Trạng thái</th><th>Alias</th><th>Thao tác</th></tr></thead>
+            <tbody>
+              {topics.map((topic) => (
+                <tr key={topic.id}>
+                  <td><span className="code-badge">{topic.code}</span></td>
+                  <td style={{ fontWeight: 600, color: '#0f172a' }}>{displayName(topic)}</td>
+                  <td><span className={'badge ' + (topic.isActive ? 'badge-success' : 'badge-danger')}>{topic.isActive ? 'Hoạt động' : 'Tắt'}</span></td>
+                  <td><span className="muted">{topic.aliases.length} alias</span></td>
+                  <td>
+                    <button type="button" className="icon-action" title="Sửa chủ đề" aria-label="Sửa chủ đề" onClick={() => openEdit(topic)}><IconEdit size={16} /></button>
+                    <button type="button" className={'toggle-switch ' + (topic.isActive ? 'active' : '')} title={topic.isActive ? 'Tắt chủ đề' : 'Bật chủ đề'} aria-label={topic.isActive ? 'Tắt chủ đề' : 'Bật chủ đề'} onClick={() => handleToggleActive(topic)}><span /></button>
+                    <button type="button" className="icon-action" title="Quản lý alias" aria-label="Quản lý alias" onClick={() => openAliases(topic)} style={{ marginLeft: 6 }}><IconTag size={16} /></button>
+                    <button type="button" className="icon-action danger" title="Xóa chủ đề" aria-label="Xóa" onClick={() => setDeletingId(topic.id)}><IconTrash size={16} /></button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
 
       {/* Create / Edit modal */}

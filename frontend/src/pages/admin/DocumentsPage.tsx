@@ -23,6 +23,7 @@ import {
 import { listTopics, type TopicDto } from '../../api/topicApi'
 import { adminStyles } from '../../components/shared/adminStyles'
 import ConfirmDialog from '../../components/shared/ConfirmDialog'
+import { IconEdit, IconRefresh, IconTrash } from '../../components/ui/icons'
 
 const STATUS_LABELS: Record<string, string> = {
   DRAFT: 'Bản nháp',
@@ -217,9 +218,15 @@ export default function DocumentsPage() {
                 <td style={adminStyles.td}>{STATUS_LABELS[doc.status] ?? doc.status}</td>
                 <td style={adminStyles.td}>{formatDate(doc.updatedAt)}</td>
                 <td style={adminStyles.td}>
-                  <button style={adminStyles.smallButton} onClick={() => openEdit(doc)}>Sửa</button>
-                  <button style={adminStyles.smallButton} onClick={() => handleReindex(doc)}>Đánh chỉ mục lại</button>
-                  <button style={{ ...adminStyles.smallButton, color: '#ff4d4f' }} onClick={() => setDeletingId(doc.id)}>Xóa</button>
+                  <button style={adminStyles.smallButton} onClick={() => openEdit(doc)}>
+                    <IconEdit style={{ marginRight: 4 }} /> Sửa
+                  </button>
+                  <button type="button" className="icon-action" title="Đánh chỉ mục lại" aria-label="Đánh chỉ mục lại" onClick={() => handleReindex(doc)}>
+                    <IconRefresh size={16} />
+                  </button>
+                  <button type="button" className="icon-action danger" title="Xóa tài liệu" aria-label="Xóa" onClick={() => setDeletingId(doc.id)}>
+                    <IconTrash size={16} />
+                  </button>
                 </td>
               </tr>
             ))}

@@ -13,9 +13,11 @@
  *
  * On success: shows a success message, then redirects to /login.
  */
-import React, { FormEvent, useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { register } from '../api/registerApi'
+import { IconEye, IconEyeOff } from '../components/ui/icons'
+import '../styles/auth.css'
 
 interface FieldErrors {
   email?: string
@@ -29,6 +31,8 @@ export default function RegisterPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
   const [submitError, setSubmitError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
@@ -94,16 +98,32 @@ export default function RegisterPage() {
 
   if (success) {
     return (
-      <main style={styles.wrapper}>
-        <div style={styles.card}>
-          <h1 style={styles.title}>Đăng ký thành công</h1>
-          <p style={styles.successText} role="status" aria-live="polite">
-            Tài khoản đã được tạo. Đang chuyển hướng về trang đăng nhập…
-          </p>
-          <Link to="/login" style={styles.link}>
-            Đến trang đăng nhập
-          </Link>
-        </div>
+      <main className="auth-page">
+        <section className="auth-panel">
+          <div className="auth-card auth-success-card">
+            <div className="auth-success-icon">✓</div>
+            <h1 className="auth-title">Đăng ký thành công</h1>
+            <p className="auth-subtitle" role="status" aria-live="polite">
+              Tài khoản đã được tạo. Đang chuyển hướng về trang đăng nhập…
+            </p>
+            <Link
+              className="auth-submit"
+              style={{ display: 'grid', placeItems: 'center', textDecoration: 'none' }}
+              to="/login"
+            >
+              Đến trang đăng nhập
+            </Link>
+          </div>
+        </section>
+        <aside className="auth-aside">
+          <div className="auth-aside-content">
+            <span className="auth-kicker">● Bắt đầu luyện tập</span>
+            <h2>Mỗi buổi phỏng vấn là một bước tiến.</h2>
+            <p>
+              Tạo tài khoản để lưu lịch sử, nhận kết quả và luyện tập theo cấp độ của riêng bạn.
+            </p>
+          </div>
+        </aside>
       </main>
     )
   }
@@ -111,96 +131,125 @@ export default function RegisterPage() {
   // ─── Form view ─────────────────────────────────────────────────────────────
 
   return (
-    <main style={styles.wrapper}>
-      <div style={styles.card}>
-        <h1 style={styles.title}>Đăng ký tài khoản</h1>
-        <p style={styles.subtitle}>Tạo tài khoản để sử dụng hệ thống phỏng vấn mô phỏng</p>
-
-        <form onSubmit={handleSubmit} noValidate>
-          <div style={styles.field}>
-            <label htmlFor="email" style={styles.label}>
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              autoComplete="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              aria-invalid={!!fieldErrors.email}
-              aria-required="true"
-              style={styles.input}
-            />
-            {fieldErrors.email && (
-              <span role="alert" style={styles.fieldError}>
-                {fieldErrors.email}
-              </span>
-            )}
+    <main className="auth-page">
+      <section className="auth-panel">
+        <div className="auth-card">
+          <div className="auth-brand">
+            <span className="auth-brand-mark">AI</span> Interview Studio
           </div>
+          <h1 className="auth-title">Tạo tài khoản</h1>
+          <p className="auth-subtitle">Chỉ vài bước để bắt đầu luyện phỏng vấn mô phỏng theo JD.</p>
 
-          <div style={styles.field}>
-            <label htmlFor="password" style={styles.label}>
-              Mật khẩu
-            </label>
-            <input
-              id="password"
-              type="password"
-              autoComplete="new-password"
-              placeholder="Mật khẩu (tối thiểu 8 ký tự)"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              aria-invalid={!!fieldErrors.password}
-              aria-required="true"
-              style={styles.input}
-            />
-            {fieldErrors.password && (
-              <span role="alert" style={styles.fieldError}>
-                {fieldErrors.password}
-              </span>
-            )}
+          <form onSubmit={handleSubmit} noValidate>
+            <div className="auth-field">
+              <label className="auth-label" htmlFor="email">
+                Email
+              </label>
+              <input
+                className="auth-input"
+                id="email"
+                type="email"
+                autoComplete="email"
+                placeholder="ten@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                aria-invalid={!!fieldErrors.email}
+                aria-required="true"
+              />
+              {fieldErrors.email && <span role="alert" className="auth-error">{fieldErrors.email}</span>}
+            </div>
+
+            <div className="auth-field">
+              <label className="auth-label" htmlFor="password">
+                Mật khẩu
+              </label>
+              <div className="auth-input-wrap">
+                <input
+                  className="auth-input"
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  autoComplete="new-password"
+                  placeholder="Tối thiểu 8 ký tự"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  aria-invalid={!!fieldErrors.password}
+                  aria-required="true"
+                />
+                <button
+                  className="password-toggle"
+                  type="button"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  aria-label={showPassword ? 'Ẩn nội dung' : 'Hiện nội dung'}
+                >
+                  {showPassword ? <IconEyeOff /> : <IconEye />}
+                </button>
+              </div>
+              {fieldErrors.password && <span role="alert" className="auth-error">{fieldErrors.password}</span>}
+            </div>
+
+            <div className="auth-field">
+              <label className="auth-label" htmlFor="confirmPassword">
+                Xác nhận mật khẩu
+              </label>
+              <div className="auth-input-wrap">
+                <input
+                  className="auth-input"
+                  id="confirmPassword"
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  autoComplete="new-password"
+                  placeholder="Nhập lại mật khẩu"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  aria-invalid={!!fieldErrors.confirmPassword}
+                  aria-required="true"
+                />
+                <button
+                  className="password-toggle"
+                  type="button"
+                  onClick={() => setShowConfirmPassword((prev) => !prev)}
+                  aria-label={showConfirmPassword ? 'Ẩn nội dung xác nhận' : 'Hiện nội dung xác nhận'}
+                >
+                  {showConfirmPassword ? <IconEyeOff /> : <IconEye />}
+                </button>
+              </div>
+              {fieldErrors.confirmPassword && <span role="alert" className="auth-error">{fieldErrors.confirmPassword}</span>}
+            </div>
+
+            {submitError && <p role="alert" aria-live="assertive" className="auth-alert">{submitError}</p>}
+            <button className="auth-submit" type="submit" disabled={submitting} aria-busy={submitting}>
+              {submitting ? 'Đang xử lý…' : 'Tạo tài khoản'}
+            </button>
+          </form>
+
+          <p className="auth-footer">
+            Đã có tài khoản?{' '}
+            <Link className="auth-link" to="/login">
+              Đăng nhập
+            </Link>
+          </p>
+        </div>
+      </section>
+
+      <aside className="auth-aside">
+        <div className="auth-aside-content">
+          <span className="auth-kicker">● Phỏng vấn thông minh hơn</span>
+          <h2>Chuẩn bị tốt cho cơ hội tiếp theo.</h2>
+          <p>
+            Hệ thống phân tích mô tả công việc, tạo câu hỏi phù hợp và giúp bạn nhìn rõ điểm mạnh cũng như điểm cần cải thiện.
+          </p>
+          <div className="auth-benefits">
+            <div className="auth-benefit">
+              <span className="auth-benefit-check">✓</span> Thiết lập câu hỏi theo chủ đề
+            </div>
+            <div className="auth-benefit">
+              <span className="auth-benefit-check">✓</span> Theo dõi lịch sử luyện tập
+            </div>
+            <div className="auth-benefit">
+              <span className="auth-benefit-check">✓</span> Trải nghiệm thân thiện trên mọi thiết bị
+            </div>
           </div>
-
-          <div style={styles.field}>
-            <label htmlFor="confirmPassword" style={styles.label}>
-              Xác nhận mật khẩu
-            </label>
-            <input
-              id="confirmPassword"
-              type="password"
-              autoComplete="new-password"
-              placeholder="Nhập lại mật khẩu"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              aria-invalid={!!fieldErrors.confirmPassword}
-              aria-required="true"
-              style={styles.input}
-            />
-            {fieldErrors.confirmPassword && (
-              <span role="alert" style={styles.fieldError}>
-                {fieldErrors.confirmPassword}
-              </span>
-            )}
-          </div>
-
-          {submitError && (
-            <p role="alert" aria-live="assertive" style={styles.error}>
-              {submitError}
-            </p>
-          )}
-
-          <button type="submit" disabled={submitting} aria-busy={submitting} style={styles.button}>
-            {submitting ? 'Đang xử lý…' : 'Đăng ký'}
-          </button>
-        </form>
-
-        <p style={styles.footerText}>
-          Đã có tài khoản?{' '}
-          <Link to="/login" style={styles.link}>
-            Đăng nhập
-          </Link>
-        </p>
-      </div>
+        </div>
+      </aside>
     </main>
   )
 }
@@ -219,72 +268,4 @@ function getStatus(err: unknown): number | null {
     return (err.response as { status: number }).status
   }
   return null
-}
-
-// ─── Minimal inline styles (mirrors LoginPage for consistency) ───────────────
-
-const styles: Record<string, React.CSSProperties> = {
-  wrapper: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '100vh',
-    background: '#f5f5f5',
-  },
-  card: {
-    background: '#fff',
-    borderRadius: 8,
-    padding: '2rem 2.5rem',
-    boxShadow: '0 2px 12px rgba(0,0,0,0.1)',
-    width: '100%',
-    maxWidth: 400,
-  },
-  title: { margin: '0 0 0.25rem', fontSize: '1.5rem' },
-  subtitle: { margin: '0 0 1.5rem', color: '#666', fontSize: '0.875rem' },
-  field: { marginBottom: '1rem' },
-  label: { display: 'block', marginBottom: 4, fontWeight: 500 },
-  input: {
-    width: '100%',
-    padding: '0.5rem 0.75rem',
-    border: '1px solid #ccc',
-    borderRadius: 4,
-    fontSize: '1rem',
-    boxSizing: 'border-box',
-  },
-  fieldError: {
-    display: 'block',
-    color: '#c0392b',
-    marginTop: 4,
-    fontSize: '0.8125rem',
-  },
-  error: {
-    color: '#c0392b',
-    marginBottom: '0.75rem',
-    fontSize: '0.875rem',
-  },
-  successText: {
-    margin: '0 0 1.25rem',
-    color: '#1a7f37',
-    fontSize: '0.9375rem',
-  },
-  button: {
-    width: '100%',
-    padding: '0.625rem',
-    background: '#1677ff',
-    color: '#fff',
-    border: 'none',
-    borderRadius: 4,
-    fontSize: '1rem',
-    cursor: 'pointer',
-  },
-  footerText: {
-    marginTop: '1.25rem',
-    textAlign: 'center',
-    fontSize: '0.875rem',
-    color: '#555',
-  },
-  link: {
-    color: '#1677ff',
-    textDecoration: 'none',
-  },
 }

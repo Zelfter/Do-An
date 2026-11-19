@@ -1,19 +1,33 @@
 /**
- * CandidateLayout — shell for candidate-facing pages (Step 4).
+ * CandidateLayout — Candidate portal shell (redesigned, Step 2).
  *
- * Mirrors AdminLayout but uses the lighter candidate theme (interviewStyles).
- * Renders its children directly (no <Outlet/>) so each route can wrap a page.
+ * Layout: sticky top navigation (brand + nav links + user) + content + footer.
+ * On mobile the nav collapses into a toggle-down menu.
+ *
+ * LOGIC PRESERVED from the original: useAuth() user/logout, useNavigate,
+ * handleLogout (logout → /login) and the navigation set. Only JSX/styling
+ * changed; child pages render via {children}.
  */
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
-import { interviewStyles as s } from '../../components/shared/interviewStyles'
+import Footer from '../../components/ui/Footer'
+import { IconSparkles, IconLogout, IconMenu, IconClose } from '../../components/ui/icons'
 
-const ROLE_LABELS: Record<string, string> = { ADMIN: 'Quản trị', CANDIDATE: 'Ứng viên' }
+const ROLE_LABELS: Record<string, string> = {
+  ADMIN: 'Quản trị',
+  CANDIDATE: 'Ứng viên',
+}
+
+const NAV = [
+  { to: '/dashboard', label: 'Trang chủ' },
+  { to: '/interview/new', label: 'Tạo phỏng vấn' },
+]
 
 export default function CandidateLayout({ children }: { children: React.ReactNode }) {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
+  const [open, setOpen] = useState(false)
 
   async function handleLogout() {
     await logout()
@@ -21,37 +35,48 @@ export default function CandidateLayout({ children }: { children: React.ReactNod
   }
 
   return (
-    <div style={s.page}>
-      <header style={s.header}>
-        <span style={s.brand}>Phỏng vấn mô phỏng</span>
-        <div style={s.headerNav}>
-          {user && (
-            <span style={s.userInfo}>
-              {user.email} ({ROLE_LABELS[user.role] ?? user.role})
-            </span>
-          )}
-          <button type="button" style={s.ghostButtonLight} onClick={handleLogout}>
-            Đăng xuất
+    <div className="cand-shell" data-open={open}>
+      <header className="cand-topbar">
+        <NavLink className="cand-brand" to="/dashboard" aria-label="Trang chủ">
+          <span style={{ display: 'grid', placeItems: 'center', width: 36, height: 36, borderRadius: 11, background: 'linear-gradient(135deg,#4f46e5,#7c3aed)', color: '#fff', boxShadow: '0 8px 18px rgba(79,70,229,.18)' }}>
+            <IconSparkles size={19} />
+          </span>
+          <span>Phỏng vấn mô phỏng</span>
+        </NavLink>
+
+        <nav className="cand-nav" aria-label="Điều hướng ứng viên">
+          {NAV.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              className={({ isActive }) => 'cand-nav-link' + (isActive ? ' active' : '')}
+              onClick={() => setOpen(false)}
+            >
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
+
+        <div className="cand-user">
+          <span className="cand-user-email">{user?.email}</span>
+          {user && <span className="badge badge-brand">{ROLE_LABELS[user.role] ?? user.role}</span>}
+          <button className="btn btn-ghost btn-icon" onClick={handleLogout} type="button" aria-label="Đăng xuất" title="Đăng xuất">
+            <IconLogout />
           </button>
         </div>
+
+        <button
+          className="btn btn-ghost btn-icon cand-menu-btn"
+          onClick={() => setOpen((value) => !value)}
+          type="button"
+          aria-label={open ? 'Đóng menu' : 'Mở menu'}
+        >
+          {open ? <IconClose /> : <IconMenu />}
+        </button>
       </header>
 
-      <nav style={s.nav} aria-label="Điều hướng ứng viên">
-        <NavLink
-          to="/dashboard"
-          style={({ isActive }) => ({ ...s.navLink, ...(isActive ? s.navLinkActive : {}) })}
-        >
-          Trang chủ
-        </NavLink>
-        <NavLink
-          to="/interview/new"
-          style={({ isActive }) => ({ ...s.navLink, ...(isActive ? s.navLinkActive : {}) })}
-        >
-          Tạo phỏng vấn
-        </NavLink>
-      </nav>
-
-      <main style={s.main}>{children}</main>
+      <main className="cand-content">{children}</main>
+      <Footer />
     </div>
   )
 }

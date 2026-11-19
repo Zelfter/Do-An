@@ -2,9 +2,11 @@
  * LoginPage — NFR-26: all UI text in Vietnamese.
  * AC-AUTH-03/04/07: handles 200, 401, 403 responses.
  */
-import React, { FormEvent, useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import { IconEye, IconEyeOff } from '../components/ui/icons'
+import '../styles/auth.css'
 
 export default function LoginPage() {
   const { login, user } = useAuth()
@@ -14,6 +16,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
   // Becomes true only after a successful login submit; used to navigate by role.
   const [submitted, setSubmitted] = useState(false)
 
@@ -48,65 +51,79 @@ export default function LoginPage() {
   }
 
   return (
-    <main style={styles.wrapper}>
-      <div style={styles.card}>
-        <h1 style={styles.title}>Đăng nhập</h1>
-        <p style={styles.subtitle}>Ôn Java &amp; Phỏng vấn mô phỏng theo JD</p>
+    <main className="auth-page">
+      <section className="auth-panel">
+        <div className="auth-card">
+          <div className="auth-brand"><span className="auth-brand-mark">AI</span> Interview Studio</div>
+          <h1 className="auth-title">Chào mừng trở lại</h1>
+          <p className="auth-subtitle">Đăng nhập để tiếp tục hành trình luyện phỏng vấn của bạn.</p>
 
-        <form onSubmit={handleSubmit} noValidate>
-          <div style={styles.field}>
-            <label htmlFor="email" style={styles.label}>Email</label>
-            <input
-              id="email"
-              type="email"
-              autoComplete="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              aria-required="true"
-              style={styles.input}
-            />
+          <form onSubmit={handleSubmit} noValidate>
+            <div className="auth-field">
+              <label className="auth-label" htmlFor="email">Email</label>
+              <input
+                className="auth-input"
+                id="email"
+                type="email"
+                autoComplete="email"
+                placeholder="ten@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                aria-required="true"
+              />
+            </div>
+
+            <div className="auth-field">
+              <label className="auth-label" htmlFor="password">Mật khẩu</label>
+              <div className="auth-input-wrap">
+                <input
+                  className="auth-input"
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  autoComplete="current-password"
+                  placeholder="Nhập mật khẩu"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  aria-required="true"
+                />
+                <button
+                  className="password-toggle"
+                  type="button"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  aria-label={showPassword ? 'Ẩn nội dung' : 'Hiện nội dung'}
+                >
+                  {showPassword ? <IconEyeOff /> : <IconEye />}
+                </button>
+              </div>
+            </div>
+
+            {errorMsg && <p role="alert" aria-live="assertive" className="auth-alert">{errorMsg}</p>}
+
+            <button className="auth-submit" type="submit" disabled={submitting} aria-busy={submitting}>
+              {submitting ? 'Đang đăng nhập…' : 'Đăng nhập'}
+            </button>
+          </form>
+
+          <p className="auth-footer">
+            Chưa có tài khoản? <Link className="auth-link" to="/register">Tạo tài khoản mới</Link>
+          </p>
+        </div>
+      </section>
+
+      <aside className="auth-aside">
+        <div className="auth-aside-content">
+          <span className="auth-kicker">● Hệ thống phỏng vấn AI</span>
+          <h2>Luyện tập tự tin. Trả lời nổi bật.</h2>
+          <p>Dựng phòng phỏng vấn theo mô tả công việc, nhận phản hồi chi tiết và theo dõi tiến bộ của bạn theo từng chủ đề.</p>
+          <div className="auth-benefits">
+            <div className="auth-benefit"><span className="auth-benefit-check">✓</span> Câu hỏi cá nhân hóa theo JD</div>
+            <div className="auth-benefit"><span className="auth-benefit-check">✓</span> Đánh giá kỹ năng và điểm số minh bạch</div>
+            <div className="auth-benefit"><span className="auth-benefit-check">✓</span> Lịch sử luyện tập và báo cáo kết quả</div>
           </div>
-
-          <div style={styles.field}>
-            <label htmlFor="password" style={styles.label}>Mật khẩu</label>
-            <input
-              id="password"
-              type="password"
-              autoComplete="current-password"
-              placeholder="Mật khẩu"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              aria-required="true"
-              style={styles.input}
-            />
-          </div>
-
-          {errorMsg && (
-            <p role="alert" aria-live="assertive" style={styles.error}>
-              {errorMsg}
-            </p>
-          )}
-
-          <button
-            type="submit"
-            disabled={submitting}
-            aria-busy={submitting}
-            style={styles.button}
-          >
-            {submitting ? 'Đang đăng nhập…' : 'Đăng nhập'}
-          </button>
-        </form>
-
-        <p style={styles.footerText}>
-          Chưa có tài khoản?{' '}
-          <Link to="/register" style={styles.link}>
-            Đăng ký
-          </Link>
-        </p>
-      </div>
+        </div>
+      </aside>
     </main>
   )
 }
@@ -125,61 +142,4 @@ function getStatus(err: unknown): number | null {
     return (err.response as { status: number }).status
   }
   return null
-}
-
-// ─── Minimal inline styles (no external CSS deps required for scaffold) ───────
-
-const styles: Record<string, React.CSSProperties> = {
-  wrapper: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '100vh',
-    background: '#f5f5f5',
-  },
-  card: {
-    background: '#fff',
-    borderRadius: 8,
-    padding: '2rem 2.5rem',
-    boxShadow: '0 2px 12px rgba(0,0,0,0.1)',
-    width: '100%',
-    maxWidth: 400,
-  },
-  title: { margin: '0 0 0.25rem', fontSize: '1.5rem' },
-  subtitle: { margin: '0 0 1.5rem', color: '#666', fontSize: '0.875rem' },
-  field: { marginBottom: '1rem' },
-  label: { display: 'block', marginBottom: 4, fontWeight: 500 },
-  input: {
-    width: '100%',
-    padding: '0.5rem 0.75rem',
-    border: '1px solid #ccc',
-    borderRadius: 4,
-    fontSize: '1rem',
-    boxSizing: 'border-box',
-  },
-  error: {
-    color: '#c0392b',
-    marginBottom: '0.75rem',
-    fontSize: '0.875rem',
-  },
-  button: {
-    width: '100%',
-    padding: '0.625rem',
-    background: '#1677ff',
-    color: '#fff',
-    border: 'none',
-    borderRadius: 4,
-    fontSize: '1rem',
-    cursor: 'pointer',
-  },
-  footerText: {
-    marginTop: '1.25rem',
-    textAlign: 'center',
-    fontSize: '0.875rem',
-    color: '#555',
-  },
-  link: {
-    color: '#1677ff',
-    textDecoration: 'none',
-  },
 }

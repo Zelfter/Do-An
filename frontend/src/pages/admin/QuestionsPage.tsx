@@ -27,6 +27,7 @@ import {
 import { listTopics, type TopicDto } from '../../api/topicApi'
 import { adminStyles } from '../../components/shared/adminStyles'
 import ConfirmDialog from '../../components/shared/ConfirmDialog'
+import { IconEdit, IconImport, IconPlus } from '../../components/ui/icons'
 
 const LEVELS = ['JUNIOR', 'MID', 'SENIOR']
 const STATUS_LABELS: Record<string, string> = {
@@ -238,7 +239,8 @@ export default function QuestionsPage() {
       <div style={adminStyles.pageHeader}>
         <h1 style={adminStyles.pageHeading}>Ngân hàng câu hỏi</h1>
         <button type="button" style={adminStyles.primaryButton} onClick={openCreate} disabled={topics.length === 0}>
-          + Thêm câu hỏi
+          <IconPlus style={{ marginRight: 8 }} />
+          Thêm câu hỏi
         </button>
       </div>
 
@@ -250,45 +252,46 @@ export default function QuestionsPage() {
       )}
 
       {loading ? (
-        <p>Đang tải…</p>
+        <div className="admin-card"><p className="muted" style={{ padding: 24 }}>Đang tải…</p></div>
       ) : questions.length === 0 ? (
-        <p>Chưa có câu hỏi nào.</p>
+        <div className="admin-card admin-empty">
+          <svg width="94" height="94" viewBox="0 0 94 94" fill="none" aria-hidden="true">
+            <rect x="18" y="14" width="58" height="68" rx="12" fill="#EEF2FF" stroke="#C7D2FE" strokeWidth="2" />
+            <rect x="27" y="23" width="40" height="50" rx="8" fill="#fff" stroke="#E0E7FF" />
+            <path d="M36 38h22M36 47h15M36 56h20" stroke="#818CF8" strokeWidth="3" strokeLinecap="round" />
+            <circle cx="70" cy="69" r="14" fill="#4F46E5" stroke="#fff" strokeWidth="3" /><path d="M70 62v14M63 69h14" stroke="#fff" strokeWidth="3" strokeLinecap="round" />
+          </svg>
+          <h3>Chưa có câu hỏi nào trong ngân hàng</h3>
+          <p>Thêm câu hỏi thủ công hoặc chuẩn bị dữ liệu để nhập nhanh.</p>
+          <div className="empty-actions">
+            <button type="button" className="btn btn-primary" onClick={openCreate} disabled={topics.length === 0}><IconPlus size={16} /> Thêm câu hỏi đầu tiên</button>
+            <button type="button" className="btn btn-secondary" onClick={openCreate} disabled={topics.length === 0}><IconImport size={16} /> Nhập từ tệp</button>
+          </div>
+          <span style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)' }}>Chưa có câu hỏi nào.</span>
+        </div>
       ) : (
-        <table style={adminStyles.table}>
-          <thead>
-            <tr>
-              <th style={adminStyles.th}>Chủ đề</th>
-              <th style={adminStyles.th}>Cấp độ</th>
-              <th style={adminStyles.th}>Nội dung</th>
-              <th style={adminStyles.th}>Trạng thái</th>
-              <th style={adminStyles.th}>Chỉ mục</th>
-              <th style={adminStyles.th}>Thao tác</th>
-            </tr>
-          </thead>
-          <tbody>
-            {questions.map((q) => (
-              <tr key={q.id}>
-                <td style={adminStyles.td}>{topicCode(q.topicId, topics)}</td>
-                <td style={adminStyles.td}>{LEVEL_LABELS[q.level] ?? q.level}</td>
-                <td style={{ ...adminStyles.td, maxWidth: 300, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                  {q.content}
-                </td>
-                <td style={adminStyles.td}>{STATUS_LABELS[q.status] ?? q.status}</td>
-                <td style={adminStyles.td}>{INDEX_STATUS_LABELS[q.indexStatus] ?? q.indexStatus}</td>
-                <td style={adminStyles.td}>
-                  <button style={adminStyles.smallButton} onClick={() => openEdit(q)}>Sửa</button>
-                  {q.status !== 'PUBLISHED' && (
-                    <button style={adminStyles.smallButton} onClick={() => handlePublish(q)}>Xuất bản</button>
-                  )}
-                  {q.status !== 'ARCHIVED' && (
-                    <button style={adminStyles.smallButton} onClick={() => handleArchive(q)}>Lưu trữ</button>
-                  )}
-                  <button style={{ ...adminStyles.smallButton, color: '#ff4d4f' }} onClick={() => setDeletingId(q.id)}>Xóa</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="admin-card">
+          <table className="admin-table">
+            <thead><tr><th>Chủ đề</th><th>Cấp độ</th><th>Nội dung</th><th>Trạng thái</th><th>Chỉ mục</th><th>Thao tác</th></tr></thead>
+            <tbody>
+              {questions.map((q) => (
+                <tr key={q.id}>
+                  <td><span className="indigo-tag">{topicCode(q.topicId, topics)}</span></td>
+                  <td>{LEVEL_LABELS[q.level] ?? q.level}</td>
+                  <td style={{ maxWidth: 300, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{q.content}</td>
+                  <td><span className={'badge ' + (q.status === 'PUBLISHED' ? 'badge-success' : 'badge-muted')}>{STATUS_LABELS[q.status] ?? q.status}</span></td>
+                  <td>{q.indexStatus === 'INDEXED' ? <span className="badge badge-success">Đã đánh chỉ mục</span> : <span className="badge badge-muted">{INDEX_STATUS_LABELS[q.indexStatus] ?? q.indexStatus}</span>}</td>
+                  <td>
+                    <button type="button" className="icon-action" title="Sửa câu hỏi" aria-label="Sửa câu hỏi" onClick={() => openEdit(q)}><IconEdit size={16} /></button>
+                    {q.status !== 'PUBLISHED' && <button type="button" className="icon-action" title="Xuất bản" aria-label="Xuất bản" onClick={() => handlePublish(q)}>✓</button>}
+                    {q.status !== 'ARCHIVED' && <button type="button" className="icon-action" title="Lưu trữ" aria-label="Lưu trữ" onClick={() => handleArchive(q)}>▣</button>}
+                    <button type="button" className="icon-action danger" title="Xóa câu hỏi" aria-label="Xóa câu hỏi" onClick={() => setDeletingId(q.id)}>×</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
 
       {/* Create / Edit modal */}
