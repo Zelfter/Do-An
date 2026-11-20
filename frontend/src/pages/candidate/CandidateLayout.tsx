@@ -22,6 +22,7 @@ const ROLE_LABELS: Record<string, string> = {
 const NAV = [
   { to: '/dashboard', label: 'Trang chủ' },
   { to: '/interview/new', label: 'Tạo phỏng vấn' },
+  { to: '/documents', label: 'Tài liệu ôn tập' },
 ]
 
 export default function CandidateLayout({ children }: { children: React.ReactNode }) {

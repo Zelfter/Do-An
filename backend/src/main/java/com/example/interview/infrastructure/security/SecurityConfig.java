@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.AccessDeniedException;
@@ -91,7 +92,12 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/system/warmup").permitAll()
                         .requestMatchers("/ai/v1/**").permitAll()
                         .requestMatchers("/api/v1/admin/**").access(adminAuthorizationManager(roleHierarchy))
-                        .requestMatchers("/api/v1/**").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/**").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/**").authenticated()
+                        .requestMatchers(HttpMethod.PATCH, "/api/v1/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/**").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/documents", "/api/documents/**", "/api/v1/documents", "/api/v1/documents/**").authenticated()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(eh -> eh

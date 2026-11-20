@@ -29,6 +29,8 @@ import CandidateDashboard from '../pages/candidate/CandidateDashboard'
 import NewInterviewPage from '../pages/candidate/NewInterviewPage'
 import InterviewReportPage from '../pages/candidate/InterviewReportPage'
 import InterviewRoomPage from '../pages/interview/InterviewRoomPage'
+import CandidateDocumentsPage from '../pages/candidate/DocumentsPage'
+import CandidateDocumentReaderPage from '../pages/candidate/DocumentReaderPage'
 
 // ─── Route guard ──────────────────────────────────────────────────────────────
 
@@ -87,6 +89,8 @@ export function AppRoutes() {
       <Route element={<PrivateRoute requiredRole="CANDIDATE" />}>
         <Route path="/dashboard" element={<CandidateLayout><CandidateDashboard /></CandidateLayout>} />
         <Route path="/interview/new" element={<CandidateLayout><NewInterviewPage /></CandidateLayout>} />
+        <Route path="/documents" element={<CandidateLayout><CandidateDocumentsPage /></CandidateLayout>} />
+        <Route path="/documents/:id" element={<CandidateLayout><CandidateDocumentReaderPage /></CandidateLayout>} />
         {/* The room is full-screen (its own header) — not wrapped in the layout */}
         <Route path="/interview/:sessionId" element={<InterviewRoomPage />} />
         <Route path="/interview/:sessionId/report" element={<CandidateLayout><InterviewReportPage /></CandidateLayout>} />

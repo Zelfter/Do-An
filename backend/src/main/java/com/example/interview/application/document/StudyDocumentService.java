@@ -7,6 +7,7 @@ import com.example.interview.infrastructure.persistence.StudyDocumentJpaEntity;
 import com.example.interview.infrastructure.persistence.StudyDocumentJpaRepository;
 import com.example.interview.infrastructure.persistence.TopicJpaEntity;
 import com.example.interview.infrastructure.persistence.TopicJpaRepository;
+import com.example.interview.infrastructure.persistence.TopicTranslationJpaEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -97,6 +98,44 @@ public class StudyDocumentService {
     @Transactional(readOnly = true)
     public List<StudyDocumentJpaEntity> listDocuments() {
         return documentRepository.findAll();
+    }
+
+    /** Candidate read pool → list indexed documents, optionally filtered by topic and keyword. */
+    @Transactional(readOnly = true)
+    public List<StudyDocumentJpaEntity> listIndexedDocuments(String topic, String keyword) {
+        String topicFilter = topic == null ? null : topic.trim().toLowerCase();
+        String keywordFilter = keyword == null ? null : keyword.trim().toLowerCase();
+
+        return documentRepository.findByStatus(STATUS_INDEXED).stream()
+                .filter(document -> {
+                    if (topicFilter == null || topicFilter.isEmpty()) return true;
+
+                    if (document.getTopic() == null) return false;
+                    if (document.getTopic().getCode().toLowerCase().contains(topicFilter)) return true;
+
+                    return document.getTopic().getTranslations().stream()
+                            .map(TopicTranslationJpaEntity::getName)
+                            .filter(name -> name != null)
+                            .anyMatch(name -> name.toLowerCase().contains(topicFilter));
+                })
+                .filter(document -> {
+                    if (keywordFilter == null || keywordFilter.isEmpty()) return true;
+
+                    String title = document.getTitle() == null ? "" : document.getTitle().toLowerCase();
+                    String content = document.getContentMd() == null ? "" : document.getContentMd().toLowerCase();
+                    return title.contains(keywordFilter) || content.contains(keywordFilter);
+                })
+                .toList();
+    }
+
+    /** GET /api/v1/admin/documents/indexed/{id} → 404 when not found or not indexed. */
+    @Transactional(readOnly = true)
+    public StudyDocumentJpaEntity getIndexedDocumentById(UUID id) {
+        StudyDocumentJpaEntity document = findDocument(id);
+        if (!STATUS_INDEXED.equals(document.getStatus())) {
+            throw new ApiException(HttpStatus.NOT_FOUND, DOCUMENT_NOT_FOUND);
+        }
+        return document;
     }
 
     // ---- Full update (PUT) -----------------------------------------------
