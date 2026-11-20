@@ -48,6 +48,7 @@ public final class QuestionRequest {
             @NotBlank(message = "content không được để trống")
             String content,
             String referenceAnswer,
+            String followUpQuestion,
             @Valid List<KeyPointRequest> keyPoints
     ) {
     }
@@ -62,6 +63,7 @@ public final class QuestionRequest {
             @NotBlank(message = "content không được để trống")
             String content,
             String referenceAnswer,
+            String followUpQuestion,
             @Valid List<KeyPointRequest> keyPoints
     ) {
     }

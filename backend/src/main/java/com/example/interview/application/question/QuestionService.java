@@ -97,6 +97,7 @@ public class QuestionService {
         question.setLevel(request.level());
         question.setContent(request.content());
         question.setReferenceAnswer(request.referenceAnswer() != null ? request.referenceAnswer() : "");
+        question.setFollowUpQuestion(request.followUpQuestion());
         question.setStatus(STATUS_DRAFT);
         question.setIndexStatus(INDEX_NOT_INDEXED);
 
@@ -140,6 +141,7 @@ public class QuestionService {
         question.setLevel(request.level());
         question.setContent(request.content());
         question.setReferenceAnswer(request.referenceAnswer() != null ? request.referenceAnswer() : "");
+        question.setFollowUpQuestion(request.followUpQuestion());
 
         // Replace key points (orphanRemoval deletes the old rows on flush).
         question.getKeyPoints().clear();

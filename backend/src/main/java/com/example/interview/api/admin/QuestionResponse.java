@@ -56,6 +56,7 @@ public final class QuestionResponse {
             String level,
             String content,
             String referenceAnswer,
+            String followUpQuestion,
             String status,
             String indexStatus,
             List<KeyPointDto> keyPoints
@@ -72,6 +73,7 @@ public final class QuestionResponse {
                     q.getLevel(),
                     q.getContent(),
                     q.getReferenceAnswer(),
+                    q.getFollowUpQuestion(),
                     q.getStatus(),
                     q.getIndexStatus(),
                     keyPoints

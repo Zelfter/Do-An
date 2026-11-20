@@ -43,6 +43,10 @@ public class QuestionJpaEntity {
     @Column(name = "reference_answer", nullable = false, columnDefinition = "TEXT")
     private String referenceAnswer = "";
 
+    /** Optional scenario-specific follow-up question used by the interview flow. */
+    @Column(name = "follow_up_question", columnDefinition = "TEXT")
+    private String followUpQuestion;
+
     /** DRAFT | PUBLISHED | ARCHIVED — BR-19, AC-18. */
     @Column(name = "status", nullable = false, length = 20)
     private String status = "DRAFT";
@@ -88,6 +92,9 @@ public class QuestionJpaEntity {
 
     public String getReferenceAnswer() { return referenceAnswer; }
     public void setReferenceAnswer(String referenceAnswer) { this.referenceAnswer = referenceAnswer; }
+
+    public String getFollowUpQuestion() { return followUpQuestion; }
+    public void setFollowUpQuestion(String followUpQuestion) { this.followUpQuestion = followUpQuestion; }
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
